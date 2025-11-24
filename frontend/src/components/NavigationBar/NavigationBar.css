@@ -1,0 +1,69 @@
+.navigation-bar {
+    width: calc(100% - 20px);
+    max-width: var(--app-max-width);
+    height: 60px;
+    bottom: 0;
+    position: fixed;
+    background-color: var(--bg-color);
+    border-top: 2px solid var(--containers-color);
+    border-radius: 20px 20px 0 0;
+    padding: 10px;
+    display: flex;
+    user-select: none;
+}
+
+.navigation-button {
+    flex: 1;
+    height: 100%;
+    color: var(--navigation-color);
+    display: flex;
+    gap: 3px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-weight: var(--font-light);
+    font-size: 12px;
+    transition: color ease .2s;
+    cursor: pointer;
+}
+.navigation-button.active,
+.navigation-button.active:hover {
+    color: var(--main-color);
+}
+.navigation-button:hover {
+    color: var(--text-color);
+}
+.navigation-button .nav-icon {
+    height: 24px;
+    max-width: 29px;
+}
+
+.navigation-button.nav-new-record {
+    flex: 1;
+    max-width: 66px;
+    min-width: 66px;
+    height: 66px;
+    margin: 0 10px;
+    background: linear-gradient(45deg, var(--main-color), var(--main-light-color));
+    border-radius: 20px;
+    box-shadow: 0 0 10px var(--main-color);
+    transform: translateY(-25px);
+    animation: anim-nav-button 1s forwards;
+    transition: box-shadow ease .1s, transform ease-out .5s;
+}
+.navigation-button.nav-new-record:active {
+    box-shadow: 0 0 20px var(--main-light-color);
+    transform: translateY(-25px) scale(0.95);
+}
+@keyframes anim-nav-button {
+    from {
+        transform: translateY(0);
+        opacity: 0;
+    }
+}
+.navigation-button.nav-new-record .nav-icon {
+    width: 44px;
+    max-width: 44px;
+    height: 44px;
+    color: var(--text-light-color);
+}
