@@ -214,7 +214,7 @@ class Categories extends Component {
 				</div>
 				<div className="categories-list">
 					{categoriesInfo.map((item, index) => (
-						<CategoryItem index={index} category={item}/>
+						<CategoryItem key={index} index={index} category={item}/>
 					))}
 				</div>
 			</div>

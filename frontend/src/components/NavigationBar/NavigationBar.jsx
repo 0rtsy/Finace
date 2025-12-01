@@ -6,51 +6,52 @@ import { ReactComponent as CategoriesIcon } from "../../assets/icons/categories.
 import { ReactComponent as PlusIcon } from "../../assets/icons/plus.svg";
 import { ReactComponent as FamilyIcon } from "../../assets/icons/family.svg";
 import { ReactComponent as HistoryIcon } from "../../assets/icons/history.svg";
+import {Link} from "react-router";
 
 class NavigationBar extends React.Component {
 	render() {
-		const { activeTab, setActiveTab } = this.props;
+		const { activeTab } = this.props;
 
 		return (
 			<nav className="navigation-bar">
-				<div
+				<Link
+					to="/app"
 					className={"navigation-button nav-home" + (activeTab === "home" ? " active" : "")}
-					onClick={() => setActiveTab("home")}
 				>
 					<HomeIcon className="nav-icon"/>
 					Главная
-				</div>
+				</Link>
 
-				<div
+				<Link
+					to="/app/categories"
 					className={"navigation-button nav-categories" + (activeTab === "categories" ? " active" : "")}
-					onClick={() => setActiveTab("categories")}
 				>
 					<CategoriesIcon className="nav-icon"/>
 					Категории
-				</div>
+				</Link>
 
-				<div
+				<Link
+					to="/app/new-record"
 					className={"navigation-button nav-new-record" + (activeTab === "new-record" ? " active" : "")}
-					onClick={() => setActiveTab("new-record")}
 				>
 					<PlusIcon className="nav-icon"/>
-				</div>
+				</Link>
 
-				<div
+				<Link
+					to="/app/family"
 					className={"navigation-button nav-family" + (activeTab === "family" ? " active" : "")}
-					onClick={() => setActiveTab("family")}
 				>
 					<FamilyIcon className="nav-icon"/>
 					Семья
-				</div>
+				</Link>
 
-				<div
+				<Link
+					to="/app/history"
 					className={"navigation-button nav-history" + (activeTab === "history" ? " active" : "")}
-					onClick={() => setActiveTab("history")}
 				>
 					<HistoryIcon className="nav-icon"/>
 					История
-				</div>
+				</Link>
 			</nav>
 		)
 	}

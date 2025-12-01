@@ -1,0 +1,42 @@
+.front-window {
+    top: 0;
+    position: absolute;
+    width: 100%;
+    max-width: var(--app-max-width);
+    height: 100%;
+    background: var(--bg-color);
+    z-index: 1000;
+    opacity: 1;
+    transition: transform .2s ease-in-out,
+                opacity .3s ease-out;
+}
+.front-window.hide {
+    opacity: 0;
+    transform: translateX(100%);
+}
+
+.fw-header {
+    width: calc(100% - 40px);
+    padding: 20px 20px 0 20px;
+    display: flex;
+    align-items: center;
+}
+.fw-header .back-button {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color .2s ease;
+    color: var(--main-color);
+    cursor: pointer;
+
+    &:active {
+        background-color: var(--containers-color);
+    }
+}
+.fw-header .back-button .icon {
+    width: 34px;
+    height: 34px;
+}

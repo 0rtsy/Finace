@@ -1,15 +1,15 @@
 import './App.css';
-import React from 'react';
 
-import Main from './pages/Main/Main';
+import {BrowserRouter} from "react-router";
+import AppRouters from "./AppRouters/AppRouters";
 
-class App extends React.Component {
-	render() {
-		return (
-			<Main />
 
-		)
-	}
+function App({ store }) {
+	return (
+		<BrowserRouter>
+			<AppRouters store={store}></AppRouters>
+		</BrowserRouter>
+	)
 }
 
 export default App;

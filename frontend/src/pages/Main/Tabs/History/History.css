@@ -1,0 +1,94 @@
+.screen.history {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 0 20px 120px 20px;
+    animation: anim-home ease .3s forwards;
+}
+@keyframes anim-home {
+    from {
+        opacity: 0;
+    }
+}
+.history-title {
+    width: calc(100% - 40px);
+    display: flex;
+    flex-direction: column;
+}
+.my-contribution {
+    display: flex;
+    gap: 10px;
+    margin-top: 25px;
+    flex-direction: column;
+    justify-content: end;
+    color: var(--text-light-color);
+    animation: anim-financial-situation ease-out .5s forwards;
+}
+@keyframes anim-financial-situation {
+    from {
+        transform: translateY(-10px);
+        opacity: 0;
+    }
+}
+.my-contribution .title {
+    font-size: 14px;
+    font-weight: var(--font-light);
+}
+.my-contribution .value {
+    font-size: 24px;
+    font-weight: var(--font-bold);
+}
+.progress-container {
+    width: calc(100% - 15px);
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 7px 0 7px 15px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    opacity: 0;
+    animation: anim-income-progress ease-out .5s forwards;
+}
+@keyframes anim-income-progress {
+    from {
+        transform: translateX(-10px);
+    }
+    to {
+        opacity: 1;
+    }
+}
+.progress-container.expenses {
+    animation-delay: .3s;
+}
+.progress-container .progress-type {
+    font-size: 14px;
+    font-weight: var(--font-medium);
+    color: var(--text-color);
+}
+.progress-container .progress-bar {
+    min-width: 5px;
+    width: 30%;
+    height: 20px;
+    background-color: var(--income-color);
+    border-radius: 20px;
+    box-shadow: 0 0 10px var(--income-color);
+    animation: anim-progress-bar ease-out .5s forwards;
+}
+@keyframes anim-progress-bar {
+    from {
+        width: 0;
+    }
+}
+.progress-container.expenses .progress-bar {
+    width: 70%;
+    background-color: var(--expenses-color);
+    box-shadow: 0 0 10px var(--expenses-color);
+    animation-delay: .3s;
+}
+
+.history-content {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}

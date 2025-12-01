@@ -5,7 +5,7 @@ class Background extends React.Component {
 	render() {
 		const { activeTab } = this.props
 		let panelHeight;
-		console.log("activeTab", activeTab);
+
 		switch (activeTab) {
 			case "home":
 				panelHeight = "187px";
@@ -14,7 +14,7 @@ class Background extends React.Component {
 				panelHeight = "232px";
 				break;
 			case "history":
-				panelHeight = "600px";
+				panelHeight = "325px";
 				break;
 			case "new-record":
 				panelHeight = "0px";

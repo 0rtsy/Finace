@@ -1,10 +1,10 @@
 import "./Home.css"
-import React from "react";
+import { Component } from "react";
 
 import MonthlyResults from "../../../../components/Home/MonthlyResults/MonthlyResults";
 import TestGraphic from "../../../../components/Home/TestGraphic/TestGraphic";
 
-class Home extends React.Component {
+class Home extends Component {
 	render() {
 		return (
 			<div className="screen home">
