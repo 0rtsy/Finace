@@ -107,15 +107,45 @@ class Store {
 		]
 	}
 
+	newRecordData = {
+		type: "null",
+		sum: null,
+		labelSum: "",
+		description: "",
+		categoryId: null,
+		errorText: null
+	}
+
 	rerenderTree = () => {}
 
-	setActiveFrontWindow = (isActive, type = "", data = {}) => {
-		this.frontWindow = {
-			frontWindow: {
-				isActive: isActive,
-				type: type,
-				data: data
-			}
+	updateNewRecordData = (
+		{
+			type = undefined,
+			sum = undefined,
+			labelSum = undefined,
+			description = undefined,
+			categoryId = undefined,
+			errorText = undefined,
+		}
+	) => {
+		this.newRecordData = {
+			type: type !== undefined ? type : this.newRecordData.type,
+			sum: sum !== undefined ? sum : this.newRecordData.sum,
+			labelSum: labelSum !== undefined ? labelSum : this.newRecordData.labelSum,
+			description: description !== undefined ? description : this.newRecordData.description,
+			categoryId: categoryId !== undefined ? categoryId : this.newRecordData.categoryId,
+			errorText: errorText !== undefined ? errorText : this.newRecordData.errorText
+		};
+		this.rerenderTree();
+	}
+	clearNewRecordData = () => {
+		this.newRecordData = {
+			type: "null",
+			sum: null,
+			labelSum: "",
+			description: "",
+			categoryId: null,
+			errorText: null
 		};
 		this.rerenderTree();
 	}

@@ -1,0 +1,27 @@
+.nrc-create-button,
+.nrc-create-button {
+    width: calc(100% - 40px);
+    height: 50px;
+    background: linear-gradient(135deg, var(--main-color), var(--main-light-color));
+    color: var(--text-light-color);
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: 0.3s;
+    user-select: none;
+    text-decoration: none;
+}
+.nrc-create-button.active:hover {
+    box-shadow: 0 0 5px 2px var(--main-color);
+    transform: translateY(-5px);
+}
+.nrc-create-button.active:active {
+    transform: translateY(3px);
+}
+.nrc-create-button.disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}

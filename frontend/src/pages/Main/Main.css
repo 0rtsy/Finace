@@ -21,6 +21,8 @@
     --font-semi-bold: 600;
     --font-bold: 700;
 
+    --font-main: Inter, sans-serif;
+
     --app-max-width: 500px;
 }
 

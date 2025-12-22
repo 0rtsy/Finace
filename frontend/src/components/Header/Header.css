@@ -24,6 +24,9 @@
         opacity: 1;
         transform: translateY(0);
     }
+    to {
+        display: none;
+    }
 }
 
 .screen-title {

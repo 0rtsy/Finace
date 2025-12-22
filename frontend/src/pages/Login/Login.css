@@ -1,0 +1,25 @@
+.login-container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.button {
+    padding: 30px 60px;
+    background-color: var(--main-color);
+    border-radius: 20px;
+    font-size: 32px;
+    color: white;
+    text-decoration: none;
+    box-shadow: 0 0 15px 1px var(--main-light-color);
+    transition: .3s;
+
+    &:hover {
+        box-shadow: 0 0 30px 5px var(--main-light-color), 10px 0 5px #000000;
+        transform: scale(1.1);
+    }
+    &:active {
+        transform: scale(0.95);
+    }
+}

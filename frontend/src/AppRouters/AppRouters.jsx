@@ -6,6 +6,8 @@ import FrontWindow from "../components/FrontWindow/FrontWindow";
 import Home from "../pages/Main/Tabs/Home/Home";
 import Categories from "../pages/Main/Tabs/Categories/Categories";
 import History from "../pages/Main/Tabs/History/History";
+import NewRecord from "../pages/Main/Tabs/NewRecord/NewRecord";
+import Login from "../pages/Login/Login";
 
 function AppRouter({ store }) {
 	const location = useLocation();
@@ -37,7 +39,16 @@ function AppRouter({ store }) {
 			<Route path="/app" element={<Main store={store} activeTab={activeTab} frontWindowData={frontWindowData} />}>
 				<Route index element={<Home />} />
 				<Route path="categories" element={<Categories />} />
-				<Route path="new-record" />
+				<Route
+					path="new-record"
+					element={
+						<NewRecord
+							newRecordData={store.newRecordData}
+							updateNewRecordData={store.updateNewRecordData}
+							clearNewRecordData={store.clearNewRecordData}
+						/>
+					}
+				/>
 				<Route path="family" />
 				<Route
 					path="history"
@@ -48,6 +59,7 @@ function AppRouter({ store }) {
 					<Route path=":recordID" element={<FrontWindow isActive={true} type="recordInfo" />} />
 				</Route>
 			</Route>
+			<Route path="/" element={<Login />} />
 
 		</Routes>
 	)

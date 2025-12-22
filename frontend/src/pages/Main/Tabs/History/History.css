@@ -3,9 +3,9 @@
     display: flex;
     flex-direction: column;
     padding: 0 20px 120px 20px;
-    animation: anim-home ease .3s forwards;
+    animation: anim-history ease .3s forwards;
 }
-@keyframes anim-home {
+@keyframes anim-history {
     from {
         opacity: 0;
     }
