@@ -1,4 +1,3 @@
-import {Component} from "react";
 import "./Categories.css"
 
 import {ReactComponent as CreateStickerIcon} from "../../../../assets/icons/sticker_plus.svg";
@@ -37,189 +36,34 @@ const CategoryItem = ({ category, index }) => {
 	);
 }
 
-class Categories extends Component {
-	render() {
-		const categoriesInfo = [
-			{
-				name: "Ресторан",
-				iconName: "cutlery",
-				color: "#9C27B0",
-				records: "45 записей",
-				total: {
-					type: "expenses",
-					value: "7542,55 ₽",
-				}
-			},
-			{
-				name: "Магазин",
-				iconName: "shopping-cart",
-				color: "#2196F3",
-				records: "4599 записей",
-				total: {
-					type: "expenses",
-					value: "96 535,34 ₽",
-				}
-			},
-			{
-				name: "Магазин",
-				iconName: "shopping-cart",
-				color: "#2196F3",
-				records: "4599 записей",
-				total: {
-					type: "expenses",
-					value: "96 535,34 ₽",
-				}
-			},
-			{
-				name: "Ресторан",
-				iconName: "cutlery",
-				color: "#9C27B0",
-				records: "45 записей",
-				total: {
-					type: "expenses",
-					value: "7542,55 ₽",
-				}
-			},
-			{
-				name: "Магазин",
-				iconName: "shopping-cart",
-				color: "#2196F3",
-				records: "4599 записей",
-				total: {
-					type: "expenses",
-					value: "96 535,34 ₽",
-				}
-			},
-			{
-				name: "Машина",
-				iconName: "car",
-				color: "#FF9800",
-				records: "11 записей",
-				total: {
-					type: "expenses",
-					value: "2 536 066,10 ₽",
-				}
-			},
-			{
-				name: "Работа",
-				iconName: "baggage",
-				color: "#F44336",
-				records: "19 записей",
-				total: {
-					type: "income",
-					value: "75 331,74 ₽",
-				}
-			},
-			{
-				name: "Магазин",
-				iconName: "shopping-cart",
-				color: "#2196F3",
-				records: "4599 записей",
-				total: {
-					type: "expenses",
-					value: "96 535,34 ₽",
-				}
-			},
-			{
-				name: "Магазин",
-				iconName: "shopping-cart",
-				color: "#2196F3",
-				records: "4599 записей",
-				total: {
-					type: "expenses",
-					value: "96 535,34 ₽",
-				}
-			},
-			{
-				name: "Ресторан",
-				iconName: "cutlery",
-				color: "#9C27B0",
-				records: "45 записей",
-				total: {
-					type: "expenses",
-					value: "7542,55 ₽",
-				}
-			},
-			{
-				name: "Магазин",
-				iconName: "shopping-cart",
-				color: "#2196F3",
-				records: "4599 записей",
-				total: {
-					type: "expenses",
-					value: "96 535,34 ₽",
-				}
-			},
-			{
-				name: "Магазин",
-				iconName: "shopping-cart",
-				color: "#2196F3",
-				records: "4599 записей",
-				total: {
-					type: "expenses",
-					value: "96 535,34 ₽",
-				}
-			},
-			{
-				name: "Ресторан",
-				iconName: "cutlery",
-				color: "#9C27B0",
-				records: "45 записей",
-				total: {
-					type: "expenses",
-					value: "7542,55 ₽",
-				}
-			},
-			{
-				name: "Магазин",
-				iconName: "shopping-cart",
-				color: "#2196F3",
-				records: "4599 записей",
-				total: {
-					type: "expenses",
-					value: "96 535,34 ₽",
-				}
-			},
-			{
-				name: "Магазин",
-				iconName: "shopping-cart",
-				color: "#2196F3",
-				records: "4599 записей",
-				total: {
-					type: "expenses",
-					value: "96 535,34 ₽",
-				}
-			},
-		]
-
-		return (
-			<div className="screen categories">
-				<div className="categories-title">
-					<div className="cost-leader">
-						<div className="title">Лидер расходов</div>
-						<div className="leader-info">
-							<div className="category-container">
-								<CategoryIcon iconName="shopping-cart" className="icon"/>
-								Рестораны
-							</div>
-							<div className="leader-stat">
-								<span className="value">-73 974,76 ₽</span> за месяц
-							</div>
+function Categories({ categoriesInfo }) {
+	return (
+		<div className="screen categories">
+			<div className="categories-title">
+				<div className="cost-leader">
+					<div className="title">Лидер расходов</div>
+					<div className="leader-info">
+						<div className="category-container">
+							<CategoryIcon iconName="shopping-cart" className="icon"/>
+							Рестораны
+						</div>
+						<div className="leader-stat">
+							<span className="value">-73 974,76 ₽</span> за месяц
 						</div>
 					</div>
-					<div className="create-category-button">
-						<CreateStickerIcon className="icon"/>
-						Создать категорию
-					</div>
 				</div>
-				<div className="categories-list">
-					{categoriesInfo.map((item, index) => (
-						<CategoryItem key={index} index={index} category={item}/>
-					))}
+				<div className="create-category-button">
+					<CreateStickerIcon className="icon"/>
+					Создать категорию
 				</div>
 			</div>
-		)
-	}
+			<div className="categories-list">
+				{categoriesInfo.map((item, index) => (
+					<CategoryItem key={index} index={index} category={item}/>
+				))}
+			</div>
+		</div>
+	)
 }
 
 export default Categories;

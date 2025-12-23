@@ -38,7 +38,7 @@ function AppRouter({ store }) {
 		<Routes>
 			<Route path="/app" element={<Main store={store} activeTab={activeTab} frontWindowData={frontWindowData} />}>
 				<Route index element={<Home />} />
-				<Route path="categories" element={<Categories />} />
+				<Route path="categories" element={<Categories categoriesInfo={store.categoriesInfo} />} />
 				<Route
 					path="new-record"
 					element={
@@ -46,6 +46,7 @@ function AppRouter({ store }) {
 							newRecordData={store.newRecordData}
 							updateNewRecordData={store.updateNewRecordData}
 							clearNewRecordData={store.clearNewRecordData}
+							categoriesInfo={store.categoriesInfo}
 						/>
 					}
 				/>

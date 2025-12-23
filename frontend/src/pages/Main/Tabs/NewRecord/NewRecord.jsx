@@ -6,7 +6,7 @@ import Description from "../../../../components/NewRecord/Description/Descriptio
 import CreateButton from "../../../../components/NewRecord/CreateButton/CreateButton";
 import Categories from "../../../../components/NewRecord/Categories/Categories";
 
-function NewRecord({ newRecordData, updateNewRecordData, clearNewRecordData }) {
+function NewRecord({ newRecordData, updateNewRecordData, clearNewRecordData, categoriesInfo }) {
 	return (
 		<div className="screen new-record">
 			<div
@@ -25,7 +25,7 @@ function NewRecord({ newRecordData, updateNewRecordData, clearNewRecordData }) {
 			<div className="nrc-container">
 				<SumType newRecordData={newRecordData} updateNewRecordData={updateNewRecordData} />
 				<Description newRecordData={newRecordData} updateNewRecordData={updateNewRecordData} />
-				<Categories newRecordData={newRecordData} updateNewRecordData={updateNewRecordData} />
+				<Categories newRecordData={newRecordData} updateNewRecordData={updateNewRecordData} categoriesInfo={categoriesInfo} />
 				<CreateButton newRecordData={newRecordData} clearNewRecordData={clearNewRecordData} />
 			</div>
 		</div>

@@ -1,0 +1,44 @@
+.nrc-category {
+    min-width: 40px;
+    height: 77px;
+    border-radius: 10px;
+    background-color: #141414;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 8px;
+    color: var(--text-color);
+    font-size: 12px;
+    font-weight: var(--font-light);
+    user-select: none;
+    cursor: pointer;
+    outline-color: var(--containers-content-color);
+    transition: outline .3s ease, background .3s ease;
+
+    &.select {
+        background-color: rgba(20, 20, 20, 0.6);
+        outline: 1px solid var(--text-additional-color);
+        outline-offset: -1px;
+    }
+    &.no-select {
+        height: 50px;
+        grid-column: span 3;
+        flex-direction: row;
+        justify-content: start;
+        padding-left: 6px;
+    }
+}
+.nrc-category .icon-container {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+
+    & .icon {
+        width: 18px;
+        border-radius: 0;
+    }
+}

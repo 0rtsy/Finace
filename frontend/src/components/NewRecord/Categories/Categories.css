@@ -1,0 +1,51 @@
+.nrc-categories {
+    width: calc(100% - 60px);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    opacity: 0;
+    background-color: var(--containers-color);
+    padding: 10px;
+    border-radius: 20px;
+
+    animation: anim-nrc-box ease-out .5s forwards;
+    animation-delay: 1.1s;
+}
+.nrc-categories .container-title {
+    font-weight: var(--font-bold);
+    font-size: 16px;
+    color: var(--text-color);
+}
+
+.nrc-categories-list {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+    overflow: hidden;
+    transition: height .2s ease-in-out;
+}
+
+.nrc-categories .button-show-hide {
+    width: 100%;
+    height: 40px;
+    background-color: rgba(108, 99, 255, 0.2);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    font-size: 13px;
+    gap: 5px;
+    color: var(--text-additional-color);
+    user-select: none;
+    cursor: pointer;
+
+    & .icon {
+        transition: rotate .2s ease-in-out;
+        rotate: 180deg;
+    }
+    &.hide .icon {
+        rotate: 0deg;
+    }
+}
