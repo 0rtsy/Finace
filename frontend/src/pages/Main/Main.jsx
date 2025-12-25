@@ -19,7 +19,7 @@ function Main({ store, activeTab, frontWindowData }) {
 				</div>
 			</div>
 			<NavigationBar activeTab={activeTab} />
-			<Notifications notifications={store.notifications} />
+			<Notifications notifications={store.notifications} deleteNotification={store.deleteNotification} />
 			<FrontWindow
 				frontWindowData={frontWindowData}
 				store={store}

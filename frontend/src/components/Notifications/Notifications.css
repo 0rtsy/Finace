@@ -2,7 +2,7 @@
     position: absolute;
     width: calc(100% - 20px);
     max-height: 70%;
-    overflow-y: scroll;
+    overflow-y: auto;
     padding: 10px;
     display: flex;
     flex-direction: column;
@@ -14,6 +14,20 @@
     flex-direction: column;
     background-color: var(--containers-color);
     border-radius: 10px;
+
+    &.hide {
+        animation: anim-hide-notification .5s ease-in forwards;
+    }
+}
+@keyframes anim-hide-notification {
+    40% {
+        opacity: 1;
+        transform: translateY(30%);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-150%);
+    }
 }
 .notifications-container .notification .content {
     width: calc(100% - 20px);

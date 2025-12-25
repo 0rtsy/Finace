@@ -8,6 +8,7 @@ import Categories from "../pages/Main/Tabs/Categories/Categories";
 import History from "../pages/Main/Tabs/History/History";
 import NewRecord from "../pages/Main/Tabs/NewRecord/NewRecord";
 import Login from "../pages/Login/Login";
+import Family from "../pages/Main/Tabs/Family/Family";
 
 function AppRouter({ store }) {
 	const location = useLocation();
@@ -50,7 +51,10 @@ function AppRouter({ store }) {
 						/>
 					}
 				/>
-				<Route path="family" />
+				<Route
+					path="family"
+					element={<Family />}
+				/>
 				<Route
 					path="history"
 					element={<History

@@ -3,26 +3,23 @@ import {ReactComponent as SuccessIcon} from "../../assets/icons/success_load.svg
 import {useEffect, useState} from "react";
 
 
-function Notification({ data }) {
-	const [isVisible, setIsVisible] = useState(false);
+function Notification({ data, deleteNotification }) {
+	// const [isVisible, setIsVisible] = useState(false);
 	const [cycleCount, setCycleCount] = useState(0);
 
-	// Настройки времени (в миллисекундах)
-	const SHOW_TIME = 2000; // Показывать 2 секунды
-	const HIDE_TIME = 1000; // Скрывать 1 секунду
-	const MAX_CYCLES = 5; // Максимальное количество циклов
+	const SHOW_TIME = 2000;
+	const HIDE_TIME = 1000;
+	const MAX_CYCLES = 5;
 
 	useEffect(() => {
 		if (cycleCount >= MAX_CYCLES) return;
-
 		const showTimer = setTimeout(() => {
-			setIsVisible(true);
+			// setIsVisible(true);
 			setCycleCount(prev => prev + 1);
 		}, HIDE_TIME);
-
 		const hideTimer = setTimeout(() => {
-			setIsVisible(false);
-		}, HIDE_TIME + SHOW_TIME);
+			// setIsVisible(false);
+		}, SHOW_TIME + HIDE_TIME);
 
 		return () => {
 			clearTimeout(showTimer);
@@ -30,11 +27,14 @@ function Notification({ data }) {
 		};
 	}, [cycleCount]);
 
+	if (cycleCount === MAX_CYCLES) {
+		deleteNotification(data.id);
+	}
 
 	return (
 		<>
-			{ isVisible &&
-				<div className={`notification ${data.type}`}>
+			{ !(cycleCount >= MAX_CYCLES) &&
+				<div className={`notification ${data.type} ${cycleCount >= 4 ? "hide" : ""}`}>
 					<div className="content">
 						<div className="icon-container">
 							<SuccessIcon className="icon"/>
@@ -52,11 +52,11 @@ function Notification({ data }) {
 }
 
 
-function Notifications({ notifications }) {
+function Notifications({ notifications, deleteNotification }) {
 	return (
 		<div className="notifications-container">
 			{notifications.map((data, index) => (
-				<Notification key={index} data={data} />
+				<Notification key={index} data={data} deleteNotification={deleteNotification} />
 			))}
 		</div>
 	)

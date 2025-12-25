@@ -325,6 +325,26 @@ class Store {
 		};
 		this.rerenderTree();
 	}
+
+	deleteNotification = (id) => {
+		// let i = 0;
+		// for (const notification of this.notifications) {
+		// 	if (notification.id === id) {
+		// 		delete notification[i];
+		// 		break;
+		// 	}
+		// 	i++;
+		// }
+		// this.rerenderTree();
+	}
+	createNewNotification = (type, text) => {
+		const lastId = this.notifications[-1]
+		this.notifications.create({
+			id: lastId + 1,
+			type: type,
+			text: text
+		})
+	}
 }
 
 const store = new Store();
