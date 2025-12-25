@@ -116,6 +116,14 @@ class Store {
 		errorText: null
 	}
 
+	notifications = [
+		{
+			id: 13,
+			type: "success",
+			text: "Новая запись успешно добавлена!"
+		}
+	]
+
 	categoriesInfo = [
 		{
 			id: 351,

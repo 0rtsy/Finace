@@ -5,7 +5,7 @@ import {useState} from "react";
 import CategoryItem from "./CategoryItem/CategoryItem";
 
 function Categories({ newRecordData, updateNewRecordData, categoriesInfo }) {
-	const [isHide, setValue] = useState(false);
+	const [isHide, setValue] = useState(true);
 
 	const updateSelectedCategory = (id) => {
 		updateNewRecordData({categoryId: id});
