@@ -30,11 +30,12 @@
     background-color: var(--containers-color);
     border-radius: 20px;
     cursor: pointer;
-    transition: background-color .2s ease;
+    transition: background-color .2s ease, transform .1s ease;
     text-decoration: none;
 
     &:active {
-        background-color: var(--containers-content-color);
+        transform: scale(0.98);
+        background-color: rgba(0, 0, 0, 0.7);
     }
 }
 .record .icon {

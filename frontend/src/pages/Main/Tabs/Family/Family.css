@@ -5,18 +5,27 @@
     flex-direction: column;
     gap: 20px;
 }
-
+@keyframes anim-family-container {
+    from {
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+    }
+}
 .family-title {
     background-color: var(--containers-color);
     padding: 10px;
     border-radius: 20px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    opacity: 0;
+    gap: 7px;
+    animation: anim-family-container .4s ease-in forwards;
 }
 .family-title .graphic {
     width: 100%;
-    height: 250px;
+    height: 220px;
     background-color: #000;
     border-radius: 10px;
     color: white;
@@ -26,8 +35,8 @@
 }
 .family-title .line {
     width: 100%;
-    height: 2px;
-    border-radius: 10px;
+    height: 1px;
+    border-radius: 1px;
     background-color: var(--containers-content-color);
 }
 .family-title .control-buttons {
@@ -35,8 +44,8 @@
     gap: 10px;
 }
 .family-title .control-buttons .family-button {
-    background-color: #141414;
-    height: 100px;
+    background-color: rgba(0, 0, 0, 0.3);
+    height: 91px;
     flex: 1;
     border-radius: 10px;
     display: flex;
@@ -45,14 +54,15 @@
     align-items: center;
     justify-content: center;
     color: var(--text-additional-color);
-    font-weight: var(--font-bold);
-    font-size: 18px;
-    transition: background-color ease .3s, transform ease .3s;
+    font-weight: var(--font-semi-bold);
+    font-size: 14px;
+    transition: background-color ease .2s, transform ease .2s;
+    cursor: pointer;
     user-select: none;
 
     &:active {
-        background-color: rgba(0, 0, 0, 0.5);
-        transform: scale(0.95);
+        background-color: rgba(0, 0, 0, 0.7);
+        transform: scale(0.98);
 
     }
 }
@@ -69,34 +79,49 @@
     display: flex;
     flex-direction: column;
     border-radius: 20px;
-    gap: 10px;
+    gap: 7px;
     color: var(--text-additional-color);
     background-color: var(--containers-color);
+    opacity: 0;
+
+    animation: anim-family-container .5s ease-in forwards;
+    animation-delay: .2s;
 }
 .family-parents .title {
     display: flex;
-    font-size: 22px;
+    font-size: 20px;
     gap: 10px;
+    margin-left: 5px;
     align-items: center;
     color: var(--text-light-color);
     font-weight: var(--font-semi-bold);
 
 
     & .icon {
-        width: 36px;
-        height: 36px;
+        width: 30px;
+        height: 30px;
         color: var(--main-light-color);
     }
 }
-
-
-
-
+.family-parents .line {
+    width: 100%;
+    height: 1px;
+    border-radius: 1px;
+    background-color: var(--containers-content-color);
+}
 
 .screen.family .user-container {
     background-color: #141414;
     padding: 10px;
     border-radius: 10px;
+    transition: background-color ease .2s, transform ease .2s;
+    cursor: pointer;
+    user-select: none;
+
+    &:active {
+        transform: scale(0.98);
+        background-color: rgba(0, 0, 0, 0.7);
+    }
 }
 .screen.family .user-container .user-info {
     display: flex;
@@ -108,8 +133,9 @@
     color: var(--text-color);
     font-weight: var(--font-semi-bold);
     font-size: 22px;
-    width: 45px;
-    height: 45px;
+    width: 48px;
+    height: 48px;
+    border: 2px solid var(--containers-color);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -131,8 +157,9 @@
     font-size: 16px;
 }
 .screen.family .user-container .owner-icon-container {
-    width: 40px;
-    height: 40px;
+    width: 32px;
+    height: 32px;
+    margin-right: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -141,15 +168,14 @@
     color: var(--main-color);
 
     & .icon {
-        width: 20px;
-        height: 20px;
+        width: 18px;
+        height: 18px;
     }
 }
-
 .screen.family .user-container .finance-statistic {
     display: flex;
     justify-content: space-around;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 .screen.family .user-container .finance-statistic .user-stat {
     display: flex;
@@ -160,8 +186,9 @@
     gap: 5px;
 
     & .icon {
-        width: 20px;
-        height: 20px;
+        opacity: 0.3;
+        width: 16px;
+        height: 16px;
     }
     &.income {
         color: var(--income-color);

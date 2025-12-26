@@ -1,8 +1,7 @@
 import "./CreateButton.css"
-import {Link} from "react-router";
 
 
-function CreateButton({ newRecordData, clearNewRecordData }) {
+function CreateButton({ newRecordData, clearNewRecordData, createNewNotification }) {
 	let isCanCreate = false;
 	if (
 		newRecordData.type !== "null" &&
@@ -11,12 +10,20 @@ function CreateButton({ newRecordData, clearNewRecordData }) {
 		isCanCreate = true;
 	}
 
+	const ClickHandler = () => {
+		clearNewRecordData();
+		createNewNotification(
+			"success",
+			"Новая запись успешно добавлена!"
+		);
+	}
+
 	return (
 		<>
 			{ isCanCreate ? (
-				<Link to="/app" className="nrc-create-button active" onClick={() => {clearNewRecordData()}}>
+				<div className="nrc-create-button active" onClick={() => {ClickHandler()}}>
 					Создать
-				</Link>
+				</div>
 			) : (
 				<div className="nrc-create-button disabled">
 					Создать

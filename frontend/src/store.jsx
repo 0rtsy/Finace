@@ -116,13 +116,7 @@ class Store {
 		errorText: null
 	}
 
-	notifications = [
-		{
-			id: 13,
-			type: "success",
-			text: "Новая запись успешно добавлена!"
-		}
-	]
+	notifications = []
 
 	categoriesInfo = [
 		{
@@ -327,19 +321,19 @@ class Store {
 	}
 
 	deleteNotification = (id) => {
-		// let i = 0;
-		// for (const notification of this.notifications) {
-		// 	if (notification.id === id) {
-		// 		delete notification[i];
-		// 		break;
-		// 	}
-		// 	i++;
-		// }
-		// this.rerenderTree();
+		let i = 0;
+		for (const notification of this.notifications) {
+			if (notification.id === id) {
+				this.notifications.splice(i, 1);
+				break;
+			}
+			i++;
+		}
+		this.rerenderTree();
 	}
 	createNewNotification = (type, text) => {
-		const lastId = this.notifications[-1]
-		this.notifications.create({
+		const lastId = this.notifications.length !== 0 ? this.notifications[-1].id : 0
+		this.notifications.push({
 			id: lastId + 1,
 			type: type,
 			text: text

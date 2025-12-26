@@ -48,6 +48,7 @@ function AppRouter({ store }) {
 							updateNewRecordData={store.updateNewRecordData}
 							clearNewRecordData={store.clearNewRecordData}
 							categoriesInfo={store.categoriesInfo}
+							createNewNotification={store.createNewNotification}
 						/>
 					}
 				/>
