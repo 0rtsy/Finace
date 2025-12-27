@@ -1,11 +1,9 @@
-import random
-
-import uvicorn
-from fastapi import FastAPI
+from fastapi import FastAPI, APIRouter
 from fastapi.middleware.cors import CORSMiddleware
+from backend.routers import auth
 
 
-app = FastAPI(docs_url=None, redoc_url=None)
+app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
@@ -14,19 +12,11 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-
-@app.get("/api/")
-async def main_page():
-	return "Hello world!"
-
-@app.post("/api/test")
-async def test_request():
-	return {
-		"id": random.randint(0, 1000),
-		"form": "uv"
-	}
+main_router = APIRouter(prefix="/api")
+main_router.include_router(auth.router)
+app.include_router(main_router)
 
 
 if __name__ == "__main__":
+	import uvicorn
 	uvicorn.run(app, port=8525)

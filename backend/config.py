@@ -1,6 +1,7 @@
 import os
 
 from dotenv import load_dotenv
+from fastapi.security import HTTPBearer
 
 load_dotenv()
 
@@ -16,3 +17,5 @@ class Settings:
 	server_domain: str = os.getenv("SERVER_DOMAIN", "http://127.0.0.1")
 
 settings = Settings()
+
+security = HTTPBearer()

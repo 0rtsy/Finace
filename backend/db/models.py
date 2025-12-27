@@ -17,8 +17,10 @@ class Records(Base):
 
 	id = Column(String(64), primary_key=True, nullable=False)
 	amount = Column(Float, nullable=False)
-	created_at = Column(DateTime, default=datetime.now())
+	type = Column(String(8), nullable=False)
 	owner_id = Column(Integer, ForeignKey("users.id"), nullable=False)
+	description = Column(String(100))
+	created_at = Column(DateTime, default=datetime.now())
 	category_id = Column(String, ForeignKey("categories.id"))
 
 class Categories(Base):
