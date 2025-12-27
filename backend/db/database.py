@@ -6,9 +6,11 @@ from backend.db.base import Base
 
 
 engine = create_engine(settings.database_url)
-Base.metadata.create_all(engine)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
+
+def create_db():
+	Base.metadata.create_all(engine)
 
 async def get_db():
 	db = SessionLocal()

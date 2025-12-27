@@ -26,18 +26,6 @@ def get_date_group(record_date: datetime) -> str:
 		return "Вчера"
 	elif record_date_date == today - timedelta(days=2):
 		return "Позавчера"
-	elif record_date_date >= today - timedelta(days=7):
-		# Для дней в пределах недели - название дня недели
-		days_ru = {
-			0: "Понедельник",
-			1: "Вторник",
-			2: "Среда",
-			3: "Четверг",
-			4: "Пятница",
-			5: "Суббота",
-			6: "Воскресенье"
-		}
-		return days_ru[record_date_date.weekday()]
 	else:
 		# Для более старых дат - полная дата
 		return record_date_date.strftime("%d %B %Y").replace(

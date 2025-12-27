@@ -10,7 +10,9 @@ from backend.db import models, SessionLocal
 
 
 def data_validation(email: str, password: str, name: str | None = None) -> tuple[bool, str | None]:
-	if len(name) > 32:
+	if name is None:
+		pass
+	elif len(name) > 32:
 		return False, "Имя должно быть не длиннее 32 символов"
 	else:
 		name_pattern = r'^[A-Za-zА-Яа-яёЁ\-\.]+$'
@@ -55,7 +57,7 @@ def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(securit
 
 def verify_token(token: str) -> Optional[str]:
 	try:
-		payload = jwt.decode(token, settings.SECRET_KEY, algorithms=[settings.ALGORITHM])
+		payload = jwt.decode(token, settings.secret_key, algorithms=[settings.algorithm])
 		email: str = payload.get("sub")
 		return email
 	except JWTError:

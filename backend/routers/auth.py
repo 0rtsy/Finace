@@ -29,9 +29,9 @@ class Token(BaseModel):
 
 def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
 	to_encode = data.copy()
-	expire = datetime.now() + (expires_delta or timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES))
+	expire = datetime.now() + (expires_delta or timedelta(minutes=settings.access_token_expire_minutes))
 	to_encode.update({"exp": expire})
-	encoded_jwt = jwt.encode(to_encode, settings.SECRET_KEY, algorithm=settings.ALGORITHM)
+	encoded_jwt = jwt.encode(to_encode, settings.secret_key, algorithm=settings.algorithm)
 	return encoded_jwt
 
 
@@ -41,7 +41,7 @@ router = APIRouter()
 
 @router.post("/register")
 def register(user: Register, db: Session = Depends(get_db)):
-	status, error = data_validation(user.email, user.pasword, user.name)
+	status, error = data_validation(user.email, user.password, user.name)
 	if not status:
 		return {"error": error}
 
@@ -69,9 +69,9 @@ def register(user: Register, db: Session = Depends(get_db)):
 	return {"error": None}
 
 
-@router.post("/login", response_model=Token)
+@router.post("/login")
 def login(user_data: Login, db: Session = Depends(get_db)):
-	status, error = data_validation(user_data.email, user_data.pasword)
+	status, error = data_validation(user_data.email, user_data.password)
 	if not status:
 		return {"error": error}
 
