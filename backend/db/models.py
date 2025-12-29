@@ -10,7 +10,8 @@ class Users(Base):
 	name = Column(String(32), nullable=False)
 	email = Column(String, unique=True, nullable=False)
 	password = Column(String(64), nullable=False)
-	family_rule = Column(String(16), default=None)
+	family_role = Column(String(16), default=None)
+	family_id = Column(String(64), ForeignKey("families.id"), default=None)
 
 class Records(Base):
 	__tablename__ = "records"
@@ -37,3 +38,4 @@ class Families(Base):
 	id = Column(String(64), primary_key=True, nullable=False)
 	members_id = Column(JSON, default=list, nullable=False)
 	owner_id = Column(Integer, ForeignKey("users.id"), nullable=False)
+	invite_code = Column(String(8), nullable=False)

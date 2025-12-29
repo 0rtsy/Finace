@@ -19,3 +19,6 @@ class Settings:
 settings = Settings()
 
 security = HTTPBearer()
+
+no_category_color = "#ADB5BD"
+family_invite_link = f"{settings.server_domain}/app/family?invite_code=%s"

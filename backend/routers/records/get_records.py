@@ -1,22 +1,18 @@
+import re
 from datetime import datetime, timedelta, date
 
-from fastapi import Depends, APIRouter
+from fastapi import Depends, APIRouter, HTTPException
 from sqlalchemy.orm import Session
+from starlette import status
 
+from backend.config import no_category_color
 from backend.db import models, get_db
-from backend.tools import get_current_user
+from backend.tools import get_current_user, format_currency
 
 router = APIRouter()
 
 
-def format_currency(value: float) -> str:
-	"""Форматирование суммы в денежный формат"""
-	formatted = f"{value:,.2f}".replace(",", " ").replace(".", ",")
-	return f"{formatted} ₽"
-
-
 def get_date_group(record_date: datetime) -> str:
-	"""Определение группы даты (Сегодня, Вчера и т.д.)"""
 	today = date.today()
 	record_date_date = record_date.date()
 
@@ -27,7 +23,6 @@ def get_date_group(record_date: datetime) -> str:
 	elif record_date_date == today - timedelta(days=2):
 		return "Позавчера"
 	else:
-		# Для более старых дат - полная дата
 		return record_date_date.strftime("%d %B %Y").replace(
 			"January", "января").replace("February", "февраля").replace(
 			"March", "марта").replace("April", "апреля").replace(
@@ -37,38 +32,54 @@ def get_date_group(record_date: datetime) -> str:
 			"November", "ноября").replace("December", "декабря")
 
 
-@router.post("/getMyRecords")
+@router.post("/get_my_data")
 async def load_user_records_data(
 		user: models.Users = Depends(get_current_user),
 		db: Session = Depends(get_db)
 ):
-	records_query = (
-		db.query(models.Records, models.Categories)
-		.join(models.Categories, models.Records.category_id == models.Categories.id)
+	records_query: list[type[models.Records]] = (
+		db.query(models.Records)
 		.filter(models.Records.owner_id == user.id)
 		.order_by(models.Records.created_at.desc())
 		.all()
 	)
+	print(records_query)
 
 	total_income = 0.0
 	total_expenses = 0.0
 
 	records_by_date = {}
 
-	for record, category in records_query:
-		# Суммируем общие суммы
+	for record in records_query:
 		if record.type == "income":
 			total_income += record.amount
 		else:
 			total_expenses += record.amount
 
-		# Формируем запись
+		if record.category_id is None:
+			category_name = "Без категории"
+			category_color = no_category_color
+			category_icon = "no_category"
+		else:
+			category_data: type[models.Categories] = (
+				db.query(models.Categories).filter(models.Categories.id == record.category_id).first()
+			)
+			if category_data is None:
+				category_name = "Без категории"
+				category_color = no_category_color
+				category_icon = "no_category"
+			else:
+				category_name = category_data.name
+				category_color = category_data.color
+				category_icon = category_data.icon_name
+
+
 		formatted_record = {
 			"id": record.id,
 			"type": record.type,
-			"name": category.name,
-			"color": category.color,
-			"iconName": category.icon_name,
+			"name": category_name,
+			"color": category_color,
+			"iconName": category_icon,
 			"description": record.description,
 			"sum": format_currency(record.amount),
 			"amount": record.amount,
@@ -107,3 +118,65 @@ async def load_user_records_data(
 	}
 
 	return result
+
+
+@router.post("/get_owner/<record_id>")
+async def record_info(
+		record_id: str,
+		user: models.Users = Depends(get_current_user),
+		db: Session = Depends(get_db)
+):
+	if not re.match(r'^[A-Za-z0-9]+$', record_id):
+		raise HTTPException(status_code=400, detail="Invalid arguments")
+	elif len(record_id) != 64:
+		raise HTTPException(status_code=400, detail="Invalid arguments")
+
+	record_data: type[models.Records] = db.query(models.Records).filter(models.Records.id == record_id).first()
+
+	if record_data is None:
+		return {
+			"error": "Not found"
+		}
+
+	if record_data.owner_id == user.id:
+		return {
+			"error": None,
+			"data": {
+				"name": user.name,
+				"role": user.family_role
+			}
+		}
+	record_owner = db.query(models.Users).filter(models.Users.id == record_data.owner_id).first()
+	if record_owner is None:
+		return {
+			"error": "Not found"
+		}
+	elif record_owner.family_id is not None:
+		family_data: type[models.Families] = (
+			db.query(models.Families)
+			.filter(models.Families.id == record_owner.family_id)
+			.first()
+		)
+		if family_data is None:
+			return {
+				"error": "Not found"
+			}
+		elif (
+				record_owner.id not in family_data.members_id or
+				user.id not in family_data.members_id
+		):
+			return {
+				"error": "Not found"
+			}
+		return {
+			"error": None,
+			"data": {
+				"name": record_owner.name,
+				"role": record_owner.family_role
+			}
+		}
+	else:
+		return {
+			"error": "Not found"
+		}
+

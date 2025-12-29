@@ -1,6 +1,6 @@
 from fastapi import FastAPI, APIRouter
 from fastapi.middleware.cors import CORSMiddleware
-from backend.routers import auth, records
+from backend.routers import auth, records, families
 
 
 app = FastAPI()
@@ -15,6 +15,7 @@ app.add_middleware(
 main_router = APIRouter(prefix="/api")
 main_router.include_router(auth.router)
 main_router.include_router(records.router)
+main_router.include_router(families.router)
 app.include_router(main_router)
 
 

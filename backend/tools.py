@@ -1,4 +1,6 @@
+import random
 import re
+import string
 from typing import Optional
 
 from fastapi import Depends, HTTPException
@@ -62,3 +64,10 @@ def verify_token(token: str) -> Optional[str]:
 		return email
 	except JWTError:
 		return None
+
+def generate_random_string(length: int = 64) -> str:
+	return ''.join(random.choice(string.ascii_letters + string.digits) for _ in range(length))
+
+def format_currency(value: float) -> str:
+	formatted = f"{value:,.2f}".replace(",", " ").replace(".", ",")
+	return f"{formatted} ₽"
