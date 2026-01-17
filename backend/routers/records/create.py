@@ -1,10 +1,9 @@
 from fastapi import Depends, APIRouter, HTTPException
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
-from unicodedata import category
 
-from backend.db import get_db, models
-from backend.tools import get_current_user, generate_random_string
+from db import get_db, models
+from tools import get_current_user, generate_random_string
 
 router = APIRouter()
 

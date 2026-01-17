@@ -7,7 +7,7 @@ import Home from "../pages/Main/Tabs/Home/Home";
 import Categories from "../pages/Main/Tabs/Categories/Categories";
 import History from "../pages/Main/Tabs/History/History";
 import NewRecord from "../pages/Main/Tabs/NewRecord/NewRecord";
-import Login from "../pages/Login/Login";
+import Auth from "../pages/Auth/Auth";
 import Family from "../pages/Main/Tabs/Family/Family";
 
 function AppRouter({ store }) {
@@ -26,7 +26,21 @@ function AppRouter({ store }) {
 			if (segment2 !== undefined) {
 				frontWindowData = {
 					type: "recordInfo",
-					data: {recordId: segment2},
+					data: {recordId: segment2}
+				}
+			}
+		}
+		else if (firstSegment === "categories") {
+			const segment2 = segments[2];
+			if (segment2 === "new_category") {
+				frontWindowData = {
+					type: "newCategory",
+					data: {}
+				}
+			} else if (segment2 !== undefined) {
+				frontWindowData = {
+					type: "categoryInfo",
+					data: {categoryId: segment2}
 				}
 			}
 		}
@@ -37,9 +51,15 @@ function AppRouter({ store }) {
 
 	return (
 		<Routes>
+			{/* Страница самого приложения */}
 			<Route path="/app" element={<Main store={store} activeTab={activeTab} frontWindowData={frontWindowData} />}>
 				<Route index element={<Home />} />
-				<Route path="categories" element={<Categories categoriesInfo={store.categoriesInfo} />} />
+				<Route
+					path="categories"
+					element={<Categories categoriesInfo={store.categoriesInfo} />}
+				>
+					<Route path="new_category" element={<FrontWindow isActive={true} type="newCategory" />} />
+				</Route>
 				<Route
 					path="new-record"
 					element={
@@ -65,7 +85,9 @@ function AppRouter({ store }) {
 					<Route path=":recordID" element={<FrontWindow isActive={true} type="recordInfo" />} />
 				</Route>
 			</Route>
-			<Route path="/" element={<Login />} />
+
+			{/* Страница входа и регистрации */}
+			<Route path="/" element={<Auth />} />
 
 		</Routes>
 	)

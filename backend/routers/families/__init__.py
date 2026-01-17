@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from backend.routers.families import create, get_members, kick_member
+from routers.families import create, get_members, kick_member
 
 
 router = APIRouter(prefix="/families", tags=["families"])

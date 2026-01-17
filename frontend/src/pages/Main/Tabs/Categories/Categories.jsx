@@ -4,6 +4,7 @@ import {ReactComponent as CreateStickerIcon} from "../../../../assets/icons/stic
 import {ReactComponent as ArrowDownIcon} from "../../../../assets/icons/arrow_down.svg";
 import {ReactComponent as ArrowUpIcon} from "../../../../assets/icons/arrow_up.svg";
 import CategoryIcon from "../../../../components/CategoryIcon/CategoryIcon";
+import {Link} from "react-router";
 
 
 const CategoryItem = ({ category, index }) => {
@@ -52,10 +53,10 @@ function Categories({ categoriesInfo }) {
 						</div>
 					</div>
 				</div>
-				<div className="create-category-button">
+				<Link to="/app/categories/new_category" className="create-category-button">
 					<CreateStickerIcon className="icon"/>
 					Создать категорию
-				</div>
+				</Link>
 			</div>
 			<div className="categories-list">
 				{categoriesInfo.map((item, index) => (

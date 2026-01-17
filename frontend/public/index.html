@@ -5,11 +5,112 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta
     name="description"
-    content="Web site created using create-react-app"
+    content="Web-app"
   />
   <title>React App</title>
+  <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+      body {
+          background-color: #121212;
+          padding: 0;
+          margin: 0;
+      }
+      .loading-container {
+          position: fixed;
+          font-family: Inter, sans-serif;
+          display: flex;
+          flex-direction: column;
+          height: 100vh;
+          width: 100vw;
+          pointer-events: none;
+
+          align-items: center;
+          justify-content: center;
+          gap: 50px;
+          transition: .5s;
+      }
+      .loading-container .title {
+          color: #E9ECEF;
+          font-weight: 600;
+          font-size: 26px;
+          display: flex;
+      }
+      .loading-container .title .dot1 {
+          opacity: 0;
+          animation: dot1-animation 2s infinite;
+      }
+      .loading-container .title .dot2 {
+          opacity: 0;
+          animation: dot2-animation 2s infinite;
+      }
+      .loading-container .title .dot3 {
+          opacity: 0;
+          animation: dot3-animation 2s infinite;
+      }
+
+      @keyframes dot1-animation {
+          30% { opacity: 1; }
+          90% { opacity: 1; }
+      }
+      @keyframes dot2-animation {
+          25% { opacity: 0; }
+          55% { opacity: 1; }
+          90% { opacity: 1; }
+      }
+      @keyframes dot3-animation {
+          50% { opacity: 0; }
+          80% { opacity: 1; }
+          90% { opacity: 1; }
+      }
+
+
+      .loading-container .progress-bar {
+          position: relative;
+          width: 70%;
+          max-width: 450px;
+          height: 10px;
+          background-color: #1e1e1e;
+          display: flex;
+          border-radius: 10px;
+          overflow: hidden;
+      }
+      .loading-container .progress-bar .progress {
+          position: absolute;
+          width: 0;
+          left: 0;
+          height: 100%;
+          border-radius: 10px;
+          background: linear-gradient(90deg, #6C63FF, #8A84FF);
+          animation: progress-bar-animation 2s ease-out infinite;
+      }
+
+      @keyframes progress-bar-animation {
+          40% {
+              width: 100%;
+              left: 0;
+          }
+          80% {
+              width: 0;
+              left: 100%;
+          }
+      }
+  </style>
 </head>
 <body>
-  <div id="root"></div>
+  <div id="root">
+    <div class="loading-container">
+      <div class="title">
+        Загрузка
+        <span class="dot1">.</span>
+        <span class="dot2">.</span>
+        <span class="dot3">.</span>
+      </div>
+
+      <div class="progress-bar">
+        <div class="progress"></div>
+      </div>
+    </div>
+  </div>
+
 </body>
 </html>

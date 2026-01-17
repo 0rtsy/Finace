@@ -1,8 +1,8 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
-from backend.db import models, get_db
-from backend.tools import get_current_user, generate_random_string
+from db import models, get_db
+from tools import get_current_user, generate_random_string
 
 router = APIRouter()
 

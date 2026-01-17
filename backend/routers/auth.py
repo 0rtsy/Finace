@@ -8,9 +8,9 @@ from jose import jwt
 from typing import Optional
 from sqlalchemy.orm import Session
 
-from backend.config import settings
-from backend.db import get_db, models
-from backend.tools import data_validation
+from config import settings
+from db import get_db, models
+from tools import data_validation
 
 
 class Login(BaseModel):

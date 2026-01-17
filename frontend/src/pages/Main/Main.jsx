@@ -6,9 +6,14 @@ import Header from "../../components/Header/Header";
 import FrontWindow from "../../components/FrontWindow/FrontWindow";
 import {Outlet} from "react-router";
 import Notifications from "../../components/Notifications/Notifications";
+import {useEffect} from "react";
 
 
 function Main({ store, activeTab, frontWindowData }) {
+	useEffect(() => {
+		document.body.style.backgroundColor = "var(--bg-color)";
+	})
+
 	return (
 		<div className="container">
 			<div className="app-container">

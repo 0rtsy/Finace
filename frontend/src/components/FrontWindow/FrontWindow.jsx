@@ -1,6 +1,7 @@
 import "./FrontWindow.css"
 import React from 'react';
 import RecordInfo from "./RecordInfo/RecordInfo";
+import NewCategory from "./NewCategory/NewCategory";
 
 function FrontWindow({ frontWindowData, store }) {
 	let active = "hide";
@@ -12,6 +13,7 @@ function FrontWindow({ frontWindowData, store }) {
 	return (
 		<div className={`front-window ${active}`} >
 			{ type === "recordInfo" && <RecordInfo data={frontWindowData.data} recordsData={store.records.recordsData} />}
+			{ type === "newCategory" && <NewCategory recordsData={store.records.recordsData} />}
 		</div>
 	)
 }

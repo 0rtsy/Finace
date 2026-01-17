@@ -3,11 +3,10 @@ from datetime import datetime, timedelta, date
 
 from fastapi import Depends, APIRouter, HTTPException
 from sqlalchemy.orm import Session
-from starlette import status
 
-from backend.config import no_category_color
-from backend.db import models, get_db
-from backend.tools import get_current_user, format_currency
+from config import no_category_color
+from db import models, get_db
+from tools import get_current_user, format_currency
 
 router = APIRouter()
 

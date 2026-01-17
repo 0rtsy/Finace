@@ -7,8 +7,8 @@ from fastapi import Depends, HTTPException
 from fastapi.security import HTTPAuthorizationCredentials
 from jose import jwt, JWTError
 
-from backend.config import security, settings
-from backend.db import models, SessionLocal
+from config import security, settings
+from db import models, SessionLocal
 
 
 def data_validation(email: str, password: str, name: str | None = None) -> tuple[bool, str | None]:
