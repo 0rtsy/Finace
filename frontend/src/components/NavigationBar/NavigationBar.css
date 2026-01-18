@@ -1,5 +1,5 @@
 .navigation-bar {
-    position: absolute;
+    position: fixed;
     width: calc(100% - 20px);
     max-width: var(--app-max-width);
     height: 60px;
