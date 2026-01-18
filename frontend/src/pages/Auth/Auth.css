@@ -1,48 +1,58 @@
-body {
-    background: #131222;
-}
-
 .auth-container {
-    position: relative;
     width: 100vw;
-    max-width: 500px;
+    max-width: 600px;
     height: 100vh;
-    overflow: hidden;
 }
-.auth-container .background {
-    position: fixed;
-    height: 100%;
+.auth-container .auth-title {
+    position: relative;
     width: 100%;
-    max-width: 500px;
+    height: 200px;
     display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    overflow: visible;
+    background-color: #131222;
+    justify-content: space-between;
+    align-items: end;
+    overflow: hidden;
 
-    & img {
-        width: 200px;
-        position: absolute;
-        filter: drop-shadow(0 0 100px rgba(108, 99, 255, 0.4));
-    }
+    & img { position: absolute; z-index: 2 }
     & img:first-child {
-        top: 5%;
-        left: -100px;
+        left: -10%;
+        bottom: 10px;
+        filter: drop-shadow(0 0 100px rgba(108, 99, 255, 0.7));
         animation:
-            anim-background-obj-first-spawn 1s ease-out forwards,
-            anim-background-obj 10s ease-in-out infinite;
+                anim-background-obj-first-spawn 1s ease-out forwards,
+                anim-background-obj 10s ease-in-out infinite;
     }
-    & img:last-child {
-        top: calc(92% - 200px);
-        right: -7%;
+    & img:nth-child(2) {
+        right: -30px;
+        filter: drop-shadow(0 0 90px var(--main-light-color));
         animation:
-            anim-background-obj-last-spawn 1.2s ease-out forwards,
-            anim-background-obj 10s ease-in-out infinite 4s;
+                anim-background-obj-last-spawn 1.2s ease-out forwards,
+                anim-background-obj 10s ease-in-out infinite 4s;
     }
+}
+.auth-container .auth-title .transition {
+    position: absolute;
+    z-index: 4;
+    width: 100%;
+    height: 100px;
+    background: linear-gradient(
+            to top,
+            rgb(18, 18, 18) 25%,
+            rgba(18, 18, 18, 0.996) 30%,
+            rgba(18, 18, 18, 0.6) 75%,
+            transparent
+    );
+    backdrop-filter: blur(50px);
+    mask: linear-gradient(
+        to top,
+        rgba(12, 12, 12, 1) 30%,
+        rgba(12, 12, 12, 0.8) 60%,
+        transparent 100%
+    );
 }
 @keyframes anim-background-obj {
     50% {
-        transform: translateY(10%) translateX(2%);
+        transform: translateY(-5%) translateX(10%);
     }
     100% {
         transform: translateY(0);
@@ -50,15 +60,19 @@ body {
 }
 @keyframes anim-background-obj-first-spawn {
     from {
-        transform: translateY(-100%) translateX(-50%);
+        transform: translateY(-60%) translateX(-50%);
     }
 }
 @keyframes anim-background-obj-last-spawn {
     from {
-        transform: translateY(150%) translateX(40%);
+        transform: translateY(30%) translateX(150%);
     }
 }
 
+.auth-container .content {
+    width: 100%;
+    overflow: hidden;
+}
 .auth-container .wrapper {
     height: 100%;
     width: 100%;
@@ -67,16 +81,21 @@ body {
     transition: transform .7s cubic-bezier(0.25, 0.4, 0.5, 1);
 
     &.register {
-        transform: translateX(-150%);
+        transform: translateX(calc(-150% - 20px));
     }
 }
 .auth-slide {
     min-width: 100%;
     height: 100%;
     padding: 0 20px;
+    margin-bottom: 50px;
     display: flex;
     align-items: center;
     box-sizing: border-box;
+
+    &.register {
+        padding: 0 40px;
+    }
 }
 .register-container {
     min-width: 100%;

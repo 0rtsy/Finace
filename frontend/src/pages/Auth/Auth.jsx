@@ -1,12 +1,12 @@
 import "./Auth.css";
-import {Link, useSearchParams} from "react-router";
+import {useSearchParams} from "react-router";
 import {ReactComponent as ErrorIcon} from "../../assets/icons/error.svg";
 import Login from "./Login/Login";
 import Register from "./Register/Register";
 import {useState} from "react";
 
 
-function Auth({  }) {
+function Auth() {
 	const [isFrontWindow, setFrontWindow] = useState(false);
 	const [searchParam] = useSearchParams();
 	const tab = searchParam.get("tab") || "";
@@ -14,18 +14,20 @@ function Auth({  }) {
 	return (
 		<>
 			<div className="auth-container">
-				<div className="background">
-					<img src="/images/coin.png" alt="" />
-					<img src="/images/stat.png" alt="" />
-				</div>
-				<div className={`wrapper ${tab}`}>
-					<div className="auth-slide login">
-						<Login isFrontWindow={isFrontWindow} setFrontWindow={setFrontWindow} />
+				<header className="auth-title">
+					<img src="/images/coin.png" alt="" width={167} height={167} />
+					<img src="/images/stat.png" alt="" width={148} height={148} />
+					<div className="transition"></div>
+				</header>
+				<div className="content">
+					<div className={`wrapper ${tab}`}>
+						<div className="auth-slide login">
+							<Login isFrontWindow={isFrontWindow} setFrontWindow={setFrontWindow} />
+						</div>
+						<div className="auth-slide register">
+							<Register isFrontWindow={isFrontWindow} setFrontWindow={setFrontWindow} />
+						</div>
 					</div>
-					<div className="auth-slide register">
-						<Register isFrontWindow={isFrontWindow} setFrontWindow={setFrontWindow} />
-					</div>
-
 				</div>
 
 			</div>
