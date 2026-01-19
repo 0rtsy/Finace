@@ -103,6 +103,7 @@
 
 .front-info-window {
     position: fixed;
+    z-index: 100;
     top: 0;
     left: 0;
     width: 100%;
@@ -122,6 +123,7 @@
 .front-info-window .info-container {
     padding: 20px 15px;
     max-width: 450px;
+    margin: 0 20px;
     background-color: #1e1e1e;
     border-radius: 20px;
     border: 2px solid #333;
