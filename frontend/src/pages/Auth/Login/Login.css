@@ -1,11 +1,10 @@
 
 .login-container {
     position: relative;
-    width: calc(100% - 40px);
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 0 20px;
     gap: 10px;
 }
 .login-container .login-title {
