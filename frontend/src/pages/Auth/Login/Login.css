@@ -29,6 +29,17 @@
     &:focus-within {
         border: 2px solid var(--text-additional-color);
     }
+    &.error {
+        border-color: var(--expenses-color);
+
+        & input{
+            color: var(--expenses-color);
+
+            &::placeholder {
+                color: rgba(239, 68, 68, 0.7);
+            }
+        }
+    }
 }
 .login-container .input-field .label {
     height: 40px;
@@ -57,7 +68,6 @@
     color: var(--text-color);
     font-weight: var(--font-medium);
     font-size: 20px;
-
 }
 .login-container .login-button {
     width: 50%;

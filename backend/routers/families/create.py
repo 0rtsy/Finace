@@ -12,7 +12,7 @@ async def create_family(
 	user: models.Users = Depends(get_current_user),
 	db: Session = Depends(get_db)
 ):
-	if user.family_id is not None:
+	if user.family is not None:
 		return {"error": "Вы уже состоите в семье"}
 
 	while True:
@@ -21,18 +21,21 @@ async def create_family(
 			break
 
 	while True:
-		new_invite_code = generate_random_string(8)
+		new_invite_code = generate_random_string(6).upper()
 		if db.query(models.Families).filter(models.Families.invite_code == new_invite_code).first() is None:
 			break
 
-	db.add(
-		models.Families(
-			id=new_family_id,
-			members_id=[],
-			owner_id=user.id,
-			invite_code=new_invite_code,
-		)
+
+	user = db.query(models.Users).filter_by(id=user.id).first() # Достаём юзера в новой (нынешней) сессии
+
+	family = models.Families(
+		id=new_family_id,
+		members_id=[user.id],
+		owner=user,
+		invite_code=new_invite_code,
 	)
+	db.add(family)
+	user.family_id = family.id
 	db.commit()
 
 	return {

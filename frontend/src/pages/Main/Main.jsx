@@ -7,12 +7,17 @@ import FrontWindow from "../../components/FrontWindow/FrontWindow";
 import {Outlet} from "react-router";
 import Notifications from "../../components/Notifications/Notifications";
 import {useEffect} from "react";
+import useLoadUserInfo from "../../hooks/useLoadUserInfo";
+import useLoadFamilyData from "../../hooks/useLoadFamilyData";
 
 
 function Main({ store, activeTab, frontWindowData }) {
 	useEffect(() => {
 		document.body.style.backgroundColor = "var(--bg-color)";
 	})
+
+	useLoadUserInfo(store.updateUserData, store.user.id === undefined);
+	useLoadFamilyData(store.updateFamilyData, store.familyData.ownerId === undefined)
 
 	return (
 		<div className="container">
@@ -24,7 +29,7 @@ function Main({ store, activeTab, frontWindowData }) {
 				</div>
 			</div>
 			<NavigationBar activeTab={activeTab} />
-			<Notifications notifications={store.notifications} deleteNotification={store.deleteNotification} />
+			<Notifications notification={store.notification} deleteNotification={store.deleteNotification} />
 			<FrontWindow
 				frontWindowData={frontWindowData}
 				store={store}

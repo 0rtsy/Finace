@@ -4,6 +4,7 @@
     height: 50px;
     background: linear-gradient(135deg, var(--main-color), var(--main-light-color));
     color: var(--text-light-color);
+    border: none;
     font-size: 20px;
     display: flex;
     align-items: center;

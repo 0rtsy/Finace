@@ -8,7 +8,7 @@ import Categories from "../../../../components/NewRecord/Categories/Categories";
 
 function NewRecord(
 	{ newRecordData, updateNewRecordData, clearNewRecordData, categoriesInfo,
-	  createNewNotification }
+	  createNewNotification, updateFamilyData, updateRecordsData, updateCategoriesData }
 ) {
 	return (
 		<div className="screen new-record">
@@ -28,8 +28,20 @@ function NewRecord(
 			<div className="nrc-container">
 				<SumType newRecordData={newRecordData} updateNewRecordData={updateNewRecordData} />
 				<Description newRecordData={newRecordData} updateNewRecordData={updateNewRecordData} />
-				<Categories newRecordData={newRecordData} updateNewRecordData={updateNewRecordData} categoriesInfo={categoriesInfo} />
-				<CreateButton newRecordData={newRecordData} clearNewRecordData={clearNewRecordData} createNewNotification={createNewNotification} />
+				<Categories
+					newRecordData={newRecordData}
+					updateNewRecordData={updateNewRecordData}
+					categoriesInfo={categoriesInfo}
+					updateCategoriesData={updateCategoriesData}
+				/>
+				<CreateButton
+					newRecordData={newRecordData}
+					clearNewRecordData={clearNewRecordData}
+					createNewNotification={createNewNotification}
+					updateFamilyData={updateFamilyData}
+					updateRecordsData={updateRecordsData}
+					updateCategoriesData={updateCategoriesData}
+				/>
 			</div>
 		</div>
 	)

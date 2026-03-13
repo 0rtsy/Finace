@@ -10,7 +10,7 @@ from sqlalchemy.orm import Session
 
 from config import settings
 from db import get_db, models
-from tools import data_validation
+from tools import data_validation, get_current_user
 
 
 class Login(BaseModel):
@@ -58,7 +58,8 @@ def register(user: Register, db: Session = Depends(get_db)):
 				id=new_user_id,
 				email=user.email,
 				password=user.password,
-				name=user.name
+				name=user.name,
+				family=None
 			)
 		)
 		db.commit()
@@ -92,12 +93,11 @@ def login(user_data: Login, db: Session = Depends(get_db)):
 	}
 
 
-# @router.post("/verify_token")
-# def check_token(credentials: HTTPAuthorizationCredentials = Depends(security)):
-# 	token = credentials.credentials
-# 	username = verify_token(token)
-#
-# 	if username:
-# 		return {"valid": True, "username": username}
-# 	else:
-# 		return {"valid": False}
+@router.get("/get_me")
+def get_user_data(user: models.Users = Depends(get_current_user)):
+	return {
+		"id": user.id,
+		"name": user.name,
+		"avatar": user.avatar,
+		"family_role": user.family_role
+	}

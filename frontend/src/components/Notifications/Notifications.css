@@ -14,9 +14,31 @@
     flex-direction: column;
     background-color: var(--containers-color);
     border-radius: 10px;
+    animation:
+            anim-view-notification .3s ease-in forwards,
+            anim-hide-notification .5s ease-in forwards 5s;
 
-    &.hide {
-        animation: anim-hide-notification .5s ease-in forwards;
+    /*&.hide {*/
+    /*    animation: ;*/
+    /*}*/
+
+    &.success {
+        & .icon-container {
+            background-color: rgba(16, 185, 129, 0.2);
+            color: var(--income-color);
+        }
+        & .to-end-progress-bar .progress {
+            background-color: var(--income-color);
+        }
+    }
+    &.error {
+        & .icon-container {
+            background-color: rgba(239, 68, 68, 0.2);
+            color: var(--expenses-color);
+        }
+        & .to-end-progress-bar .progress {
+            background-color: var(--expenses-color);
+        }
     }
 }
 @keyframes anim-hide-notification {
@@ -25,6 +47,12 @@
         transform: translateY(30%);
     }
     100% {
+        opacity: 0;
+        transform: translateY(-150%);
+    }
+}
+@keyframes anim-view-notification {
+    from {
         opacity: 0;
         transform: translateY(-150%);
     }
@@ -44,8 +72,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgba(16, 185, 129, 0.2);
-    color: var(--income-color);
+    background-color: rgba(18, 18, 18, 0.2);
+    color: rgb(18, 18, 18);
     border-radius: 50%;
 
     & .icon {
@@ -62,7 +90,7 @@
     & .progress {
         width: 100%;
         height: 100%;
-        background-color: var(--income-color);
+        background-color: rgb(18, 18, 18);
         animation: anim-notification-ending 5s ease-out forwards;
     }
 }

@@ -67,6 +67,7 @@
 }
 .progress-container .progress-bar {
     min-width: 5px;
+    max-width: calc(100% - 15px);
     width: 30%;
     height: 20px;
     background-color: var(--income-color);
@@ -87,8 +88,32 @@
 }
 
 .history-content {
+    position: relative;
     margin-top: 40px;
     display: flex;
     flex-direction: column;
     gap: 10px;
+
+    & .loading-records-container {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    & .empty-list {
+        position: absolute;
+        width: calc(100% - 40px);
+        height: 300px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        align-items: center;
+        justify-content: center;
+        color: var(--text-additional-color);
+        font-size: 20px;
+
+        & .icon {
+            width: 40px;
+            height: 40px;
+        }
+    }
 }

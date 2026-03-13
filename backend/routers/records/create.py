@@ -40,13 +40,10 @@ async def create_record(
 			id=new_record_id,
 			amount=record.sum,
 			type=record.type,
-			owner_id=user.id,
+			owner=db.query(models.Users).filter_by(id=user.id).first(),
 			description=record.description,
-			category_id=None if category_obj is None else category_obj.id
+			category=None if category_obj is None else category_obj
 		)
 	)
 	db.commit()
-	return {
-		"errors": None,
-		"id": new_record_id
-	}
+	return {"error": None}

@@ -1,15 +1,54 @@
 import "./Auth.css";
-import {useSearchParams} from "react-router";
+import {useNavigate, useSearchParams} from "react-router";
 import {ReactComponent as ErrorIcon} from "../../assets/icons/error.svg";
 import Login from "./Login/Login";
 import Register from "./Register/Register";
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import userApi from "../../api/userApi";
+
+
+export const useAuthRedirect = () => {
+	const navigate = useNavigate();
+
+	useEffect(() => {
+		let isMounted = true;
+
+		const checkAuth = async () => {
+			const answer = await userApi.getMe();
+			if (isMounted && answer.status) {
+				navigate("/family", {replace: true});
+			}
+		}
+
+		checkAuth().catch(error => {
+			console.error("Unhandled error in checkAuth:", error);
+		});
+
+		return () => {
+			isMounted = false;
+		};
+	}, [navigate]);
+};
 
 
 function Auth() {
 	const [isFrontWindow, setFrontWindow] = useState(false);
+	const [frontWindowData, setFrontWindowData] = useState({
+		title: "",
+		description: ""
+	});
 	const [searchParam] = useSearchParams();
 	const tab = searchParam.get("tab") || "";
+
+	useAuthRedirect();
+
+	useEffect(() => {
+
+
+
+	}, []);
+
+
 
 	return (
 		<>
@@ -22,10 +61,16 @@ function Auth() {
 				<div className="content">
 					<div className={`wrapper ${tab}`}>
 						<div className="auth-slide login">
-							<Login isFrontWindow={isFrontWindow} setFrontWindow={setFrontWindow} />
+							<Login
+								setFrontWindow={setFrontWindow}
+								setFrontWindowData={setFrontWindowData}
+							/>
 						</div>
 						<div className="auth-slide register">
-							<Register isFrontWindow={isFrontWindow} setFrontWindow={setFrontWindow} />
+							<Register
+								setFrontWindow={setFrontWindow}
+								setFrontWindowData={setFrontWindowData}
+							/>
 						</div>
 					</div>
 				</div>
@@ -37,8 +82,8 @@ function Auth() {
 						<ErrorIcon className="icon"/>
 					</div>
 					<div className="text-container">
-						<div className="title">Ошибка входа в аккаунт</div>
-						Неверный логин или пароль. Попробуйте снова
+						<div className="title">{frontWindowData.title}</div>
+						{frontWindowData.description}
 					</div>
 					<div className="ok-button" onClick={() => {setFrontWindow(false)}}>Закрыть</div>
 				</div>

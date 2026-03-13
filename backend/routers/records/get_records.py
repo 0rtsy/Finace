@@ -31,46 +31,54 @@ def get_date_group(record_date: datetime) -> str:
 			"November", "ноября").replace("December", "декабря")
 
 
-@router.post("/get_my_data")
-async def load_user_records_data(
+@router.get("/get_all")
+async def load_all_family_records(
 		user: models.Users = Depends(get_current_user),
 		db: Session = Depends(get_db)
 ):
-	records_query: list[type[models.Records]] = (
+	if user.family is None:
+		return {
+			"status": 400
+		}
+
+	family_records_query: list[type[models.Records]] = (
+		db.query(models.Records)
+		.filter(models.Records.owner_id.in_(user.family.members_id))
+		.order_by(models.Records.created_at.desc())
+		.all()
+	)
+	user_records: list[type[models.Records]] = (
 		db.query(models.Records)
 		.filter(models.Records.owner_id == user.id)
 		.order_by(models.Records.created_at.desc())
 		.all()
 	)
-	print(records_query)
 
 	total_income = 0.0
 	total_expenses = 0.0
 
-	records_by_date = {}
-
-	for record in records_query:
+	for record in user_records:
 		if record.type == "income":
 			total_income += record.amount
 		else:
 			total_expenses += record.amount
 
+	records_by_date = {}
+
+	for record in family_records_query:
 		if record.category_id is None:
 			category_name = "Без категории"
 			category_color = no_category_color
-			category_icon = "no_category"
+			category_icon = "no-category"
 		else:
-			category_data: type[models.Categories] = (
-				db.query(models.Categories).filter(models.Categories.id == record.category_id).first()
-			)
-			if category_data is None:
+			if record.category is None:
 				category_name = "Без категории"
 				category_color = no_category_color
-				category_icon = "no_category"
+				category_icon = "no-category"
 			else:
-				category_name = category_data.name
-				category_color = category_data.color
-				category_icon = category_data.icon_name
+				category_name = record.category.name
+				category_color = record.category.color
+				category_icon = record.category.icon_name
 
 
 		formatted_record = {
@@ -81,6 +89,7 @@ async def load_user_records_data(
 			"iconName": category_icon,
 			"description": record.description,
 			"sum": format_currency(record.amount),
+			"creator": record.owner_id,
 			"amount": record.amount,
 			"date": int(record.created_at.timestamp() * 1000)
 		}
@@ -103,6 +112,7 @@ async def load_user_records_data(
 	expenses_percent = int((total_expenses / total_all * 100)) if total_all > 0 else 0
 
 	result = {
+		"status": 200,
 		"totals": {
 			"income": {
 				"sum": format_currency(total_income),
@@ -145,24 +155,18 @@ async def record_info(
 				"role": user.family_role
 			}
 		}
-	record_owner = db.query(models.Users).filter(models.Users.id == record_data.owner_id).first()
-	if record_owner is None:
+	if record_data.owner is None:
 		return {
 			"error": "Not found"
 		}
-	elif record_owner.family_id is not None:
-		family_data: type[models.Families] = (
-			db.query(models.Families)
-			.filter(models.Families.id == record_owner.family_id)
-			.first()
-		)
-		if family_data is None:
+	elif record_data.owner.family_id is not None:
+		if record_data.owner.family is None:
 			return {
 				"error": "Not found"
 			}
 		elif (
-				record_owner.id not in family_data.members_id or
-				user.id not in family_data.members_id
+				record_data.owner.id not in record_data.owner.family.members_id or
+				user.id not in record_data.owner.family.members_id
 		):
 			return {
 				"error": "Not found"
@@ -170,8 +174,8 @@ async def record_info(
 		return {
 			"error": None,
 			"data": {
-				"name": record_owner.name,
-				"role": record_owner.family_role
+				"name": record_data.owner.name,
+				"role": record_data.owner.family_role
 			}
 		}
 	else:

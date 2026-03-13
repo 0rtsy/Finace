@@ -3,15 +3,22 @@ import {ReactComponent as ShowIcon} from "../../../assets/icons/keyboard_arrow_d
 import {ReactComponent as NoCategoryIcon} from "../../../assets/icons/book_question.svg";
 import {useState} from "react";
 import CategoryItem from "./CategoryItem/CategoryItem";
+import ValueLoading from "../../ValueLoading/ValueLoading";
+import categories from "../../../pages/Main/Tabs/Categories/Categories";
+import useLoadCategoriesData from "../../../hooks/useLoadCategoriesData";
 
-function Categories({ newRecordData, updateNewRecordData, categoriesInfo }) {
+function Categories({newRecordData, updateNewRecordData, categoriesInfo, updateCategoriesData}) {
 	const [isHide, setValue] = useState(true);
 
 	const updateSelectedCategory = (id) => {
 		updateNewRecordData({categoryId: id});
 	}
 
-	const categoriesListRows = Math.ceil(categoriesInfo.length / 3);
+	useLoadCategoriesData(updateCategoriesData, categoriesInfo.categories === undefined);
+
+	const categoriesListRows = categoriesInfo.categories
+		? Math.ceil(categoriesInfo.categories.length / 3)
+		: 2;
 
 	return (
 		<div className="nrc-categories">
@@ -19,7 +26,9 @@ function Categories({ newRecordData, updateNewRecordData, categoriesInfo }) {
 			<div
 				className={`nrc-categories-list ${isHide ? "short" : ""}`}
 				style={{
-					height: isHide ? "214px" : `${50 + (categoriesListRows * 77 + categoriesListRows * 5)}px`,
+					height: isHide
+						? `${50 + ((categoriesListRows < 2 ? 1 : 2) * 77 + categoriesListRows * 5)}px`
+						: `${50 + (categoriesListRows * 77 + categoriesListRows * 5)}px`, // 214px
 				}}
 			>
 				<div
@@ -31,7 +40,15 @@ function Categories({ newRecordData, updateNewRecordData, categoriesInfo }) {
 					</div>
 					Без категории
 				</div>
-				{categoriesInfo.map((category, index) => (
+				{categoriesInfo.categories === undefined
+					? <>
+							<ValueLoading height="73px"/>
+							<ValueLoading height="73px"/>
+							<ValueLoading height="73px"/>
+							<ValueLoading height="73px"/>
+							<ValueLoading height="73px"/>
+						</>
+					: categoriesInfo.categories.map((category, index) => (
 					<CategoryItem
 						key={index}
 						category={category}

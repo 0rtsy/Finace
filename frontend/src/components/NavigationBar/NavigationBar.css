@@ -1,15 +1,27 @@
 .navigation-bar {
     position: fixed;
-    width: calc(100% - 20px);
+    width: calc(100% - 40px);
+    margin: 0 10px 10px 10px;
     max-width: var(--app-max-width);
     height: 60px;
     bottom: 0;
-    background-color: var(--bg-color);
-    border-top: 2px solid var(--containers-color);
-    border-radius: 20px 20px 0 0;
+    background-color: rgba(18, 18, 18, 0.7);
+    border: 2px solid var(--containers-color);
+    border-radius: 20px;
     padding: 10px;
     display: flex;
+    backdrop-filter: blur(20px);
     user-select: none;
+    z-index: 1000;
+}
+
+.nav-background {
+    position: fixed;
+    width: 100%;
+    max-width: var(--app-max-width);
+    height: 60px;
+    bottom: 0;
+    background: linear-gradient(0deg, rgba(18, 18, 18, 0.9), rgba(18, 18, 18, 0));
 }
 
 .navigation-button {

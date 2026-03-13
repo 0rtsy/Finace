@@ -4,6 +4,7 @@
     width: 100%;
     max-width: var(--app-max-width);
     height: 100%;
+    overflow-y: scroll;
     background: var(--bg-color);
     z-index: 1000;
     opacity: 1;

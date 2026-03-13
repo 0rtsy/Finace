@@ -1,0 +1,121 @@
+.nc-container.stylization {
+    opacity: 0;
+    animation: anim-input-name-new-category .5s ease-out forwards .4s;
+}
+.nc-container.stylization .preview-title {
+    width: 100%;
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+}
+.nc-container.stylization .preview-title .category-name {
+    height: 2rem;
+    color: var(--text-color);
+    font-size: 22px;
+    font-weight: var(--font-semi-bold);
+    transition: height .3s ease-out, opacity .3s ease-out;
+
+    &.hidden {
+        opacity: 0;
+        height: 0;
+    }
+}
+.nc-container.stylization .preview-title .icon-container {
+    width: 84px;
+    height: 84px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(173, 181, 189, 0.2);
+    border-radius: 50%;
+    transition: background-color .3s ease-out, color .3s ease-out;
+
+    & .icon {
+        width: 46px;
+        height: 46px;
+        color: #ADB5BD;
+    }
+}
+.nc-container.stylization .preview-title .create-button {
+    width: 60%;
+    margin-top: 10px;
+    height: 40px;
+    border-radius: 100px;
+    background: var(--main-color);
+    border: none;
+    color: var(--text-color);
+    font-size: 18px;
+    cursor: pointer;
+    font-weight: var(--font-semi-bold);
+    transition: transform .3s ease-out, background-color .3s ease-out, opacity .5s ease-out;
+
+    &:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+    }
+    &:not(:disabled):active {
+        background: var(--main-light-color);
+        transform: scale(0.95);
+    }
+}
+
+.nc-container.stylization .select-icon .icons-container,
+.nc-container.stylization .select-color .colors-container {
+    display: grid;
+    margin-top: 10px;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+}
+.nc-container.stylization .select-icon .icons-container .select-icon-button {
+    aspect-ratio: 1 / 1;
+    margin: 3px;
+    padding: 20px;
+    transition: transform .3s ease-out, background-color .3s ease-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    cursor: pointer;
+    color: var(--text-additional-color);
+
+    & .icon {
+        width: 100%;
+        height: 100%;
+    }
+
+    &.select {
+        background-color: var(--containers-content-color);
+    }
+
+    &:active {
+        transform: scale(0.95);
+    }
+}
+
+.nc-container.stylization .select-color {
+    margin-top: 20px;
+}
+.nc-container.stylization .select-color .colors-container .select-color-button {
+    aspect-ratio: 1 / 1;
+    margin: 6px;
+    padding: 10px;
+    border-radius: 50%;
+    transition: transform .3s ease-out, background-color .3s ease-out;
+
+    & .color-circle {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+    }
+
+    &.select {
+         background-color: var(--containers-content-color);
+     }
+
+    &:active {
+        transform: scale(0.95);
+    }
+}

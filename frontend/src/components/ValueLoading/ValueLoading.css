@@ -1,0 +1,29 @@
+.value-loading {
+    height: 20px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    margin: 2px 0;
+    overflow: hidden;
+    position: relative;
+}
+.value-loading::before {
+    content: "";
+    position: absolute;
+    inset: -40% -60%;
+    background: linear-gradient(
+            110deg,
+            transparent 0%,
+            rgba(255, 255, 255, 0.1) 22%,
+            rgba(255, 255, 255, 0.2) 30%,
+            transparent 44%
+    );
+    transform: translateX(-60%);
+    animation: shimmer 1.15s cubic-bezier(0.2, 0.8, 0.2, 1) infinite;
+    mix-blend-mode: screen;
+}
+@keyframes shimmer {
+    to {
+        transform: translateX(60%);
+    }
+}

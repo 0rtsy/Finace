@@ -13,46 +13,49 @@ class NavigationBar extends React.Component {
 		const { activeTab } = this.props;
 
 		return (
-			<nav className="navigation-bar">
-				<Link
-					to="/app"
-					className={"navigation-button nav-home" + (activeTab === "home" ? " active" : "")}
-				>
-					<HomeIcon className="nav-icon"/>
-					Главная
-				</Link>
+			<>
+				<nav className="navigation-bar">
+					<Link
+						to="/app"
+						className={"navigation-button nav-home" + (activeTab === "home" ? " active" : "")}
+					>
+						<HomeIcon className="nav-icon"/>
+						Главная
+					</Link>
 
-				<Link
-					to="/app/categories"
-					className={"navigation-button nav-categories" + (activeTab === "categories" ? " active" : "")}
-				>
-					<CategoriesIcon className="nav-icon"/>
-					Категории
-				</Link>
+					<Link
+						to="/app/categories"
+						className={"navigation-button nav-categories" + (activeTab === "categories" ? " active" : "")}
+					>
+						<CategoriesIcon className="nav-icon"/>
+						Категории
+					</Link>
 
-				<Link
-					to="/app/new-record"
-					className={"navigation-button nav-new-record" + (activeTab === "new-record" ? " active" : "")}
-				>
-					<PlusIcon className="nav-icon"/>
-				</Link>
+					<Link
+						to="/app/new-record"
+						className={"navigation-button nav-new-record" + (activeTab === "new-record" ? " active" : "")}
+					>
+						<PlusIcon className="nav-icon"/>
+					</Link>
 
-				<Link
-					to="/app/family"
-					className={"navigation-button nav-family" + (activeTab === "family" ? " active" : "")}
-				>
-					<FamilyIcon className="nav-icon"/>
-					Семья
-				</Link>
+					<Link
+						to="/app/family"
+						className={"navigation-button nav-family" + (activeTab === "family" ? " active" : "")}
+					>
+						<FamilyIcon className="nav-icon"/>
+						Семья
+					</Link>
 
-				<Link
-					to="/app/history"
-					className={"navigation-button nav-history" + (activeTab === "history" ? " active" : "")}
-				>
-					<HistoryIcon className="nav-icon"/>
-					История
-				</Link>
-			</nav>
+					<Link
+						to="/app/history"
+						className={"navigation-button nav-history" + (activeTab === "history" ? " active" : "")}
+					>
+						<HistoryIcon className="nav-icon"/>
+						История
+					</Link>
+				</nav>
+				<div className="nav-background"></div>
+			</>
 		)
 	}
 }

@@ -10,14 +10,15 @@ function Record({ recordData }) {
 			to={`/app/history/${recordData.id}`}
 			className={ "record " + recordData.type }
 		>
-			<CategoryIcon
-				iconName={recordData.iconName}
-				className="icon"
-				style={{
-					color: recordData.color,
-					backgroundColor: recordData.color + "33", // 20%
-				}}
-			/>
+			<div className="icon-container" style={{backgroundColor: recordData.color + "33"}}>
+				<CategoryIcon
+					iconName={recordData.iconName}
+					className="icon"
+					style={{
+						color: recordData.color
+					}}
+				/>
+			</div>
 			<div className="record-info">
 				<span className="category-name">{recordData.name}</span><br/>
 				{recordData.description}

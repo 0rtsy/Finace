@@ -22,7 +22,7 @@ class Header extends React.Component {
 
 				<div className="user-title">
 					<div className="user-role">{ user.role }</div>
-					<div className="user-avatar">{ user.name[0] }</div>
+					<div className={`user-avatar ${user.avatar}`}>{ user.name[0] }</div>
 				</div>
 			</header>
 		)

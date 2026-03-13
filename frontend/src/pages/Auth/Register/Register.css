@@ -26,6 +26,18 @@
     &:focus-within {
         border: 2px solid var(--text-additional-color);
     }
+
+    &.error {
+        border-color: var(--expenses-color);
+
+        & input{
+            color: var(--expenses-color);
+
+            &::placeholder {
+                color: rgba(239, 68, 68, 0.7);
+            }
+        }
+    }
 }
 .register-container .input-field .label {
     height: 40px;

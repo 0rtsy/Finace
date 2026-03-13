@@ -6,8 +6,9 @@ class Store {
 	}
 
 	user = {
-		role: 'Родитель',
-		name: 'Александр'
+		id: undefined,
+		role: undefined,
+		name: '?'
 	}
 
 	frontWindow = {
@@ -18,25 +19,26 @@ class Store {
 
 	records = {
 		totals: {
-			"income": {
-				sum: "8 561 205,36 ₽",
-				percent: 30
+			income: {
+				sum: undefined, // "8 561 205,36 ₽"
+				percent: 0 // 30
 			},
-			"expenses": {
-				sum: "65 350 524,91 ₽",
-				percent: 70
+			expenses: {
+				sum: undefined, // "65 350 524,91 ₽"
+				percent: 0
 			}
 		},
-		recordsData: [
+		recordsData: undefined,
+		recordsData__: [
 			{
 				date: "Сегодня",
 				records: [
 					{
 						id: "123",
 						type: "expenses",
-						name: "Продукты",
-						color: "#4CAF50",
-						iconName: "shopping-cart",
+						name: "Без категории", // Продукты
+						color: "#ADB5BD", // #4CAF50
+						iconName: "no-category", // shopping-cart
 						description: "Поход в магазин за едой",
 						sum: "65 350 524,91 ₽",
 						amount: 65_350_524.91,
@@ -116,175 +118,200 @@ class Store {
 		errorText: null
 	}
 
-	notifications = []
+	notification = undefined;
 
-	categoriesInfo = [
-		{
-			id: 351,
-			name: "Ресторан",
-			iconName: "cutlery",
-			color: "#9C27B0",
-			records: "45 записей",
-			total: {
-				type: "expenses",
-				value: "7542,55 ₽",
-			}
+	categoriesInfo = {
+		costLeader: {
+			id: undefined,
+			value: undefined
 		},
-		{
-			id: 352,
-			name: "Магазин",
-			iconName: "shopping-cart",
-			color: "#2196F3",
-			records: "4599 записей",
-			total: {
-				type: "expenses",
-				value: "96 535,34 ₽",
+		categories: undefined,
+		categoriesT: [
+			{
+				id: "351",
+				name: "Ресторан",
+				iconName: "cutlery",
+				color: "#9C27B0",
+				records: "45 записей",
+				total: {
+					type: "expenses",
+					value: "7542,55 ₽",
+				}
+			},
+			{
+				id: "352",
+				name: "Магазин",
+				iconName: "shopping-cart",
+				color: "#2196F3",
+				records: "4599 записей",
+				total: {
+					type: "expenses",
+					value: "96 535,34 ₽",
+				}
+			},
+			{
+				id: "353",
+				name: "Магазин",
+				iconName: "shopping-cart",
+				color: "#2196F3",
+				records: "4599 записей",
+				total: {
+					type: "expenses",
+					value: "96 535,34 ₽",
+				}
+			},
+			{
+				id: "354",
+				name: "Ресторан",
+				iconName: "cutlery",
+				color: "#9C27B0",
+				records: "45 записей",
+				total: {
+					type: "expenses",
+					value: "7542,55 ₽",
+				}
+			},
+			{
+				id: "355",
+				name: "Магазин",
+				iconName: "shopping-cart",
+				color: "#2196F3",
+				records: "4599 записей",
+				total: {
+					type: "expenses",
+					value: "96 535,34 ₽",
+				}
+			},
+			{
+				id: "356",
+				name: "Машина",
+				iconName: "car",
+				color: "#FF9800",
+				records: "11 записей",
+				total: {
+					type: "expenses",
+					value: "2 536 066,10 ₽",
+				}
+			},
+			{
+				id: "357",
+				name: "Работа",
+				iconName: "baggage",
+				color: "#F44336",
+				records: "19 записей",
+				total: {
+					type: "income",
+					value: "75 331,74 ₽",
+				}
+			},
+			{
+				id: "358",
+				name: "Магазин",
+				iconName: "shopping-cart",
+				color: "#2196F3",
+				records: "4599 записей",
+				total: {
+					type: "expenses",
+					value: "96 535,34 ₽",
+				}
+			},
+			{
+				id: "359",
+				name: "Магазин",
+				iconName: "shopping-cart",
+				color: "#2196F3",
+				records: "4599 записей",
+				total: {
+					type: "expenses",
+					value: "96 535,34 ₽",
+				}
+			},
+			{
+				id: "360",
+				name: "Ресторан",
+				iconName: "cutlery",
+				color: "#9C27B0",
+				records: "45 записей",
+				total: {
+					type: "expenses",
+					value: "7542,55 ₽",
+				}
+			},
+			{
+				id: "361",
+				name: "Магазин",
+				iconName: "shopping-cart",
+				color: "#2196F3",
+				records: "4599 записей",
+				total: {
+					type: "expenses",
+					value: "96 535,34 ₽",
+				}
+			},
+			{
+				id: "362",
+				name: "Магазин",
+				iconName: "shopping-cart",
+				color: "#2196F3",
+				records: "4599 записей",
+				total: {
+					type: "expenses",
+					value: "96 535,34 ₽",
+				}
+			},
+			{
+				id: "363",
+				name: "Ресторан",
+				iconName: "cutlery",
+				color: "#9C27B0",
+				records: "45 записей",
+				total: {
+					type: "expenses",
+					value: "7542,55 ₽",
+				}
+			},
+			{
+				id: "364",
+				name: "Магазин",
+				iconName: "shopping-cart",
+				color: "#2196F3",
+				records: "4599 записей",
+				total: {
+					type: "expenses",
+					value: "96 535,34 ₽",
+				}
+			},
+			{
+				id: "365",
+				name: "Магазин",
+				iconName: "shopping-cart",
+				color: "#2196F3",
+				records: "4599 записей",
+				total: {
+					type: "expenses",
+					value: "96 535,34 ₽",
+				}
+			},
+		]
+	}
+
+	familyData = {
+		ownerId: undefined,
+		inviteCode: undefined,
+		inviteLink: undefined,
+		members: undefined,
+		overallBalance: undefined,
+		forMonth: {
+			income: {
+				percent: undefined,
+				amount: undefined
+			},
+			expenses: {
+				percent: undefined,
+				amount: undefined
 			}
-		},
-		{
-			id: 353,
-			name: "Магазин",
-			iconName: "shopping-cart",
-			color: "#2196F3",
-			records: "4599 записей",
-			total: {
-				type: "expenses",
-				value: "96 535,34 ₽",
-			}
-		},
-		{
-			id: 354,
-			name: "Ресторан",
-			iconName: "cutlery",
-			color: "#9C27B0",
-			records: "45 записей",
-			total: {
-				type: "expenses",
-				value: "7542,55 ₽",
-			}
-		},
-		{
-			id: 355,
-			name: "Магазин",
-			iconName: "shopping-cart",
-			color: "#2196F3",
-			records: "4599 записей",
-			total: {
-				type: "expenses",
-				value: "96 535,34 ₽",
-			}
-		},
-		{
-			id: 356,
-			name: "Машина",
-			iconName: "car",
-			color: "#FF9800",
-			records: "11 записей",
-			total: {
-				type: "expenses",
-				value: "2 536 066,10 ₽",
-			}
-		},
-		{
-			id: 357,
-			name: "Работа",
-			iconName: "baggage",
-			color: "#F44336",
-			records: "19 записей",
-			total: {
-				type: "income",
-				value: "75 331,74 ₽",
-			}
-		},
-		{
-			id: 358,
-			name: "Магазин",
-			iconName: "shopping-cart",
-			color: "#2196F3",
-			records: "4599 записей",
-			total: {
-				type: "expenses",
-				value: "96 535,34 ₽",
-			}
-		},
-		{
-			id: 359,
-			name: "Магазин",
-			iconName: "shopping-cart",
-			color: "#2196F3",
-			records: "4599 записей",
-			total: {
-				type: "expenses",
-				value: "96 535,34 ₽",
-			}
-		},
-		{
-			id: 360,
-			name: "Ресторан",
-			iconName: "cutlery",
-			color: "#9C27B0",
-			records: "45 записей",
-			total: {
-				type: "expenses",
-				value: "7542,55 ₽",
-			}
-		},
-		{
-			id: 361,
-			name: "Магазин",
-			iconName: "shopping-cart",
-			color: "#2196F3",
-			records: "4599 записей",
-			total: {
-				type: "expenses",
-				value: "96 535,34 ₽",
-			}
-		},
-		{
-			id: 362,
-			name: "Магазин",
-			iconName: "shopping-cart",
-			color: "#2196F3",
-			records: "4599 записей",
-			total: {
-				type: "expenses",
-				value: "96 535,34 ₽",
-			}
-		},
-		{
-			id: 363,
-			name: "Ресторан",
-			iconName: "cutlery",
-			color: "#9C27B0",
-			records: "45 записей",
-			total: {
-				type: "expenses",
-				value: "7542,55 ₽",
-			}
-		},
-		{
-			id: 364,
-			name: "Магазин",
-			iconName: "shopping-cart",
-			color: "#2196F3",
-			records: "4599 записей",
-			total: {
-				type: "expenses",
-				value: "96 535,34 ₽",
-			}
-		},
-		{
-			id: 365,
-			name: "Магазин",
-			iconName: "shopping-cart",
-			color: "#2196F3",
-			records: "4599 записей",
-			total: {
-				type: "expenses",
-				value: "96 535,34 ₽",
-			}
-		},
-	]
+		}
+	}
 
 	rerenderTree = () => {}
 
@@ -320,24 +347,47 @@ class Store {
 		this.rerenderTree();
 	}
 
-	deleteNotification = (id) => {
-		let i = 0;
-		for (const notification of this.notifications) {
-			if (notification.id === id) {
-				this.notifications.splice(i, 1);
-				break;
-			}
-			i++;
-		}
+	deleteNotification = () => {
+		this.notification = undefined;
 		this.rerenderTree();
 	}
 	createNewNotification = (type, text) => {
-		const lastId = this.notifications.length !== 0 ? this.notifications[-1].id : 0
-		this.notifications.push({
-			id: lastId + 1,
+		this.notification = {
 			type: type,
 			text: text
-		})
+		}
+		this.rerenderTree();
+	}
+	updateFamilyData = (ownerId, inviteCode, inviteLink, members, overallBalance, forMonth) => {
+		this.familyData = {
+			ownerId: ownerId,
+			inviteCode: inviteCode,
+			inviteLink: inviteLink,
+			overallBalance: overallBalance,
+			members: members,
+			forMonth: forMonth
+		}
+		this.rerenderTree();
+	}
+	updateUserData = (id, name, role, avatar) => {
+		this.user = {
+			id: id,
+			role: role,
+			name: name,
+			avatar: avatar,
+		}
+		this.rerenderTree();
+	}
+
+	updateRecordsData = (recordsData) => {
+		this.records = recordsData;
+		this.rerenderTree();
+	}
+
+	updateCategoriesData = (costLeader, categories) => {
+		this.categoriesInfo.costLeader = costLeader;
+		this.categoriesInfo.categories = categories;
+		this.rerenderTree();
 	}
 }
 

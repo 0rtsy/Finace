@@ -1,6 +1,6 @@
 from fastapi import FastAPI, APIRouter
 from fastapi.middleware.cors import CORSMiddleware
-from routers import auth, records, families
+from routers import auth, records, families, categories
 
 
 app = FastAPI()
@@ -16,6 +16,7 @@ main_router = APIRouter(prefix="/api")
 main_router.include_router(auth.router)
 main_router.include_router(records.router)
 main_router.include_router(families.router)
+main_router.include_router(categories.router)
 app.include_router(main_router)
 
 

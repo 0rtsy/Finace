@@ -14,7 +14,11 @@
     font-size: 20px;
     font-weight: var(--font-medium);
 }
-
+.containers {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
 .nc-container {
     background-color: var(--containers-color);
     border-radius: 20px;
@@ -29,7 +33,6 @@
     font-weight: var(--font-medium);
     margin-bottom: 5px;
 }
-
 
 
 .fw-value-title {

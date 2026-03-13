@@ -30,9 +30,9 @@
     transition: height .3s ease;
 }
 .nrc-container .sum-container .error-text.show {
-    height: 1.2rem;
+    height: 1rem;
     color: var(--expenses-color);
-    font-size: 16px;
+    font-size: 14px;
     font-weight: var(--font-regular);
 }
 
@@ -80,7 +80,8 @@
     color: var(--text-additional-color);
     cursor: pointer;
     transition: opacity ease .5s,
-                color ease .5s;
+                color ease .5s,
+                transform ease .3s;
 
     &:first-child {
         border-radius: 10px 10px 10px 20px;
@@ -89,7 +90,7 @@
         border-radius: 10px 10px 20px 10px;
     }
     &:active {
-        transform: scale(0.99);
+        transform: scale(0.95);
     }
 }
 .nrc-container .type-container.selected .type-button { opacity: 0.4 }
