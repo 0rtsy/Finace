@@ -50,7 +50,7 @@ function AppRouter({ store }) {
 	}
 	const [activeTab, frontWindowData] = getActiveTab(location.pathname);
 
-	// console.log(store);
+	console.log(store);
 
 	return (
 		<Routes>
@@ -86,7 +86,15 @@ function AppRouter({ store }) {
 				/>
 				<Route
 					path="family"
-					element={<Family />}
+					element={
+						<Family
+							familyData={store.familyData}
+							user={store.user}
+							createNewNotification={store.createNewNotification}
+							updateFamilyData={store.updateFamilyData}
+							clearAllData={store.clearAllData}
+						/>
+					}
 				/>
 				<Route
 					path="history"

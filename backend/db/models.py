@@ -18,6 +18,16 @@ class Users(Base):
 	family_id = Column(ForeignKey('families.id'))
 	family = relationship("Families", foreign_keys=[family_id])
 
+	def __repr__(self):
+		return (f"<Users "
+				f"id={self.id} "
+				f"name={self.name} "
+				f"email={self.email} "
+				f"password={self.password} "
+				f"avatar={self.avatar} "
+				f"family_role={self.family_role} "
+				f"family_id={self.family_id}>")
+
 class Records(Base):
 	__tablename__ = "records"
 

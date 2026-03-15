@@ -39,7 +39,14 @@ async def kick_member_by_id(
 			"error": "Пользователь не найден"
 		}
 
-	user.family.members_id.remove(member.id)
+	family_data: type[models.Families] = db.query(models.Families).filter(models.Families.id == user.family_id).first()
+
+	new_members_list = family_data.members_id.copy()
+	new_members_list.remove(member.id)
+
+	family_data.members_id = new_members_list
+	db.commit()
+
 	member.family_id = None
 	member.family_role = None
 	db.commit()

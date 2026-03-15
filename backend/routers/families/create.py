@@ -36,6 +36,7 @@ async def create_family(
 	)
 	db.add(family)
 	user.family_id = family.id
+	user.family_role = "Владелец"
 	db.commit()
 
 	return {

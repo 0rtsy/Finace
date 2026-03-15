@@ -389,6 +389,60 @@ class Store {
 		this.categoriesInfo.categories = categories;
 		this.rerenderTree();
 	}
+
+	clearAllData = () => {
+		this.user = {
+			id: undefined,
+			role: undefined,
+			name: '?'
+		};
+		this.records = {
+			totals: {
+				income: {
+					sum: undefined, // "8 561 205,36 ₽"
+					percent: 0 // 30
+				},
+				expenses: {
+					sum: undefined, // "65 350 524,91 ₽"
+					percent: 0
+				}
+			},
+			recordsData: undefined
+		};
+		this.newRecordData = {
+			type: "null",
+			sum: null,
+			labelSum: "",
+			description: "",
+			categoryId: null,
+			errorText: null
+		};
+		this.notification = undefined;
+		this.categoriesInfo = {
+			costLeader: {
+				id: undefined,
+				value: undefined
+			},
+			categories: undefined
+		};
+		this.familyData = {
+			ownerId: undefined,
+			inviteCode: undefined,
+			inviteLink: undefined,
+			members: undefined,
+			overallBalance: undefined,
+			forMonth: {
+				income: {
+					percent: undefined,
+					amount: undefined
+				},
+				expenses: {
+					percent: undefined,
+					amount: undefined
+				}
+			}
+		};
+	}
 }
 
 const store = new Store();

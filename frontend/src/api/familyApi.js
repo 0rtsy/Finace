@@ -128,6 +128,60 @@ const FamilyApi = {
 				msg: ""
 			}
 		}
+	},
+
+	kickMember: async (memberId) => {
+		let resp;
+
+		try {
+			resp = await axiosClient.post("/families/kick_member", {
+				"user_id": memberId
+			})
+		} catch (error) {
+			console.log(error);
+			return {
+				status: false,
+				msg: "Ошибка подключения к серверу. Попробуйте позже"
+			}
+		}
+
+		if (resp.data.status === 200) {
+			return {
+				status: true,
+				msg: `Пользователь ${resp.data.name} исключён из семьи`
+			}
+		} else {
+			return {
+				status: false,
+				msg: resp.data.error
+			}
+		}
+	},
+
+	leave: async () => {
+		let resp;
+
+		try {
+			resp = await axiosClient.post("/families/leave")
+		} catch (error) {
+			console.log(error);
+			return {
+				status: false,
+				msg: "Ошибка подключения к серверу. Попробуйте позже"
+			}
+		}
+
+		if (resp.data.status === 200) {
+			return {
+				status: true,
+				msg: ""
+			}
+		} else {
+			return {
+				status: false,
+				msg: resp.data.error
+			}
+		}
 	}
 }
 

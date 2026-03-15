@@ -22,8 +22,17 @@ async def get_my_family_info(
 			"detail": "Family not found" # |!| redirect the user to the family creation page
 		}
 
+
 	# ===== Члены семьи =====
+	record_amounts = []
+	income_for_month = []
+	income_for_last_month = []
+	expenses_for_month = []
+	expenses_for_last_month = []
+	date_now = datetime.now()
+	date_last_month = date_now - timedelta(days=31)
 	return_data = []
+
 	for user_id in user.family.members_id:
 		member: type[models.Users] = db.query(models.Users).filter(models.Users.id == user_id).first()
 
@@ -32,28 +41,15 @@ async def get_my_family_info(
 			db.commit()
 			continue
 
-		return_data.append({
-			"id": member.id,
-			"name": member.name,
-			"role": member.family_role,
-			"avatar": member.avatar
-		})
-
-	# ===== Общее финансовое положение семьи =====
-	record_amounts = []
-	income_for_month = []
-	income_for_last_month = []
-	expenses_for_month = []
-	expenses_for_last_month = []
-	date_now = datetime.now()
-	date_last_month = date_now - timedelta(days=31)
-
-	for member in return_data:
 		member_records: list[type[models.Records]] = (
 			db.query(models.Records)
-			.filter(models.Records.owner_id == member["id"])
+			.filter(models.Records.owner_id == user_id)
 			.all()
 		)
+
+		member_income = 0
+		member_expenses = 0
+
 		for record in member_records:
 			for_month = (income_for_month, income_for_last_month)
 			amount = int(record.amount * 100)
@@ -62,11 +58,29 @@ async def get_my_family_info(
 				amount *= -1
 			record_amounts.append(amount)
 
+			if record.created_at > date_now - timedelta(days=30):
+				if record.type == "income":
+					member_income += record.amount
+				else:
+					member_expenses += record.amount
+
 			if record.created_at.year == date_now.year and record.created_at.month == date_now.month:
 				for_month[0].append(amount)
 			elif record.created_at.year == date_last_month.year and record.created_at.month == date_last_month.month:
 				for_month[1].append(amount)
 
+		return_data.append({
+			"id": member.id,
+			"name": member.name,
+			"role": member.family_role,
+			"avatar": member.avatar,
+			"totals": {
+				"income": format_currency(member_income),
+				"expenses": format_currency(member_expenses)
+			}
+		})
+
+	# ===== Общее финансовое положение семьи =====
 	overall_balance = sum(record_amounts) / 100
 
 	income_for_month = sum(income_for_month) / 100

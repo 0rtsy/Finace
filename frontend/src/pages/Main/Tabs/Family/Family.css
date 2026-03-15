@@ -14,9 +14,11 @@
     }
 }
 .screen.family .control-buttons {
+    opacity: 0;
     display: flex;
     gap: 10px;
     padding: 0 20px;
+    animation: anim-family-container .5s ease-in-out forwards;
 }
 .screen.family .control-buttons .family-button {
     background-color: var(--containers-color);
@@ -59,10 +61,16 @@
     animation-delay: .2s;
 }
 
+.screen.family .family-members {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
 .screen.family .user-container {
     background-color: var(--containers-color);
     padding: 10px 15px;
-    /*border-radius: 10px;*/
+    border-radius: 10px;
     transition: background-color ease .2s, transform ease .2s;
     cursor: pointer;
     user-select: none;
@@ -70,15 +78,6 @@
     &:active {
         transform: scale(0.98);
         background-color: rgba(30, 30, 30, 0.7);
-    }
-
-    &:first-child {
-        border-top-left-radius: 10px;
-        border-top-right-radius: 10px;
-    }
-    &:last-child {
-        border-bottom-right-radius: 10px;
-        border-bottom-left-radius: 10px;
     }
 }
 .screen.family .user-container .user-info {
@@ -192,5 +191,143 @@
     &:active {
         transform: scale(0.98);
         background-color: rgba(0, 0, 0, 0.7);
+    }
+}
+
+
+.family-confirmation-window {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    max-width: var(--app-max-width);
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    transition: opacity ease .2s;
+
+    &.hide {
+        opacity: 0;
+        pointer-events: none;
+    }
+}
+.family-confirmation-window .background {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px);
+    cursor: pointer;
+}
+.family-confirmation-window .confirmation-container {
+    position: absolute;
+    margin: 0 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    background-color: var(--containers-color);
+    padding: 20px;
+    border-radius: 20px;
+}
+.family-confirmation-window .confirmation-container .title {
+    padding: 0 5px;
+    color: var(--text-color);
+    font-size: 22px;
+    font-weight: var(--font-regular);
+
+    & .name {
+        color: var(--main-light-color);
+        font-weight: var(--font-medium);
+    }
+
+    & .warning {
+        margin-top: 10px;
+        font-weight: var(--font-light);
+        font-size: 20px;
+        color: var(--text-additional-color);
+    }
+}
+.family-confirmation-window .confirmation-container .buttons-container {
+    display: flex;
+    width: 100%;
+    gap: 10px;
+}
+.family-confirmation-window .confirmation-container .buttons-container .cw-button {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    color: var(--text-additional-color);
+    background-color: rgba(18, 18, 18, 0.8);
+    font-size: 20px;
+    font-weight: var(--font-regular);
+    cursor: pointer;
+    user-select: none;
+    transition: transform ease .2s;
+    border-radius: 10px;
+
+    &:active {
+        transform: scale(0.95);
+    }
+
+    &.confirm {
+        color: var(--expenses-color);
+        background-color: rgba(239, 68, 68, 0.2);
+    }
+}
+
+.family-confirmation-window .confirmation-container .invite-code-container {
+    position: relative;
+    display: flex;
+    margin: 0 20px;
+    padding: 10px 20px;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #333;
+    border-radius: 8px;
+    background-color: #2d2d2d;
+    color: #e0e0e0;
+    font-family: 'Courier New', monospace;
+    font-weight: var(--font-semi-bold);
+    font-size: 28px;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.3);
+
+    & .invite-code {
+        user-select: all;
+    }
+}
+.family-confirmation-window .confirmation-container .copy-button {
+    position: absolute;
+    right: 6px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: transform ease .5s;
+    color: var(--text-additional-color);
+
+    & .icon {
+        width: 20px;
+        height: 20px;
+    }
+    &.success {
+        color: var(--income-color);
+        animation: anim-success-copied ease .5s forwards;
+    }
+
+    &:active {
+        transform: scale(0.95);
+    }
+}
+@keyframes anim-success-copied {
+    0% {
+        background: none;
+    }
+    30% {
+        background-color: rgba(16, 185, 129, 0.2);
     }
 }
