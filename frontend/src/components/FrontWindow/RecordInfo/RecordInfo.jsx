@@ -5,8 +5,15 @@ import {Link, useNavigate} from "react-router"
 import { ReactComponent as IconBack } from "../../../assets/icons/arrow_left.svg";
 import { ReactComponent as IconDelete } from "../../../assets/icons/trash.svg";
 import CategoryIcon from "../../CategoryIcon/CategoryIcon";
+import useLoadCategoriesData from "../../../hooks/useLoadCategoriesData";
+import useLoadFamilyData from "../../../hooks/useLoadFamilyData";
+import useLoadRecordsData from "../../../hooks/useLoadRecordsData";
+import recordsApi from "../../../api/recordsApi";
 
-function RecordInfo({ data, recordsData, familyMembers }) {
+function RecordInfo({
+		data, recordsData, familyData, user,
+		updateFamilyData, updateRecordsData, updateCategoriesData, createNewNotification
+}) {
 	const formatDate = (timestamp) => {
 		const date = new Date(timestamp);
 
@@ -19,11 +26,14 @@ function RecordInfo({ data, recordsData, familyMembers }) {
 	};
 
 	let navigate = useNavigate();
+	const loadCategoriesData = useLoadCategoriesData(updateCategoriesData, false);
+	const loadFamilyData = useLoadFamilyData(updateFamilyData, false);
+	const loadRecordsData = useLoadRecordsData(updateRecordsData, false);
 
 	let recordData, creator = undefined;
 
 	// Search record by id
-	if (recordsData && familyMembers) {
+	if (recordsData && familyData.members) {
 		for (const recordsDaily of recordsData) {
 			for (const record of recordsDaily.records) {
 				if (record.id === data.recordId) {
@@ -37,16 +47,27 @@ function RecordInfo({ data, recordsData, familyMembers }) {
 			navigate("/app/history");
 		}
 
-		for (const member of familyMembers) {
+		for (const member of familyData.members) {
 			if (member.id === recordData.creator) {
 				creator = member;
 				break;
 			}
 		}
-		console.log(recordData);
 	}
+	const clickDeleteButton = async () => {
+		const answer = await recordsApi.deleteRecord(recordData.id);
 
-
+		if (!answer.status) {
+			createNewNotification("error", answer.msg);
+			navigate("/app/history");
+		} else {
+			loadFamilyData();
+			loadRecordsData();
+			loadCategoriesData();
+			createNewNotification("success", "Запись успешно удалена!");
+			navigate("/app/history");
+		}
+	}
 
 	return (
 		<div className="content">
@@ -58,9 +79,14 @@ function RecordInfo({ data, recordsData, familyMembers }) {
 					<IconBack className="icon"/>
 				</Link>
 				<div className="title-date">{recordData && formatDate(recordData.date)}</div>
-				<div className="delete-button">
-					<IconDelete className="icon"/>
-				</div>
+				{recordData && (recordData.creator === user.id || user.id === familyData.ownerId )
+					&& <div
+						className="delete-button"
+						onClick={() => clickDeleteButton()}
+					>
+						<IconDelete className="icon"/>
+					</div>
+				}
 			</header>
 			{recordData && <>
 				<div className="fw-value-title">
@@ -82,17 +108,17 @@ function RecordInfo({ data, recordsData, familyMembers }) {
 							{recordData.description}
 						</div>
 					}
-				</div>
-				<div className="creator">
-					<div className="title">Создатель</div>
-					<div className="user-container">
-						<div className="avatar">
-							А.
-						</div>
-						<div className="user-info">
-							<span className="name">Александр</span>
-							Отец
-						</div>
+					<div className="creator">
+						<div className="title">Создатель</div>
+						{creator && <div className="user-container">
+							<div className={`avatar ${creator.avatar}`}>
+								{creator.name[0]}
+							</div>
+							<div className="user-info">
+								<span className="name">{creator.name}</span>
+								{creator.role}
+							</div>
+						</div>}
 					</div>
 				</div>
 			</>}

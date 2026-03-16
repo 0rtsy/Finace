@@ -12,7 +12,7 @@ export default function useLoadRecordsData(updateRecordsData, forceLoad = true) 
 		if (resp.status) {
 			updateRecordsData(resp.data);
 		} else if (resp.do === 1) {
-			// navigate("/family", {replace: true});
+			navigate("/family", {replace: true});
 		}
 	}, [updateRecordsData, navigate]);
 

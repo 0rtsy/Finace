@@ -109,6 +109,12 @@
     justify-content: center;
     border-radius: 50%;
     background-color: #6C63FF;
+
+    &.blue   { background-color: #3498db }
+    &.green  { background-color: #2ecc71 }
+    &.purple { background-color: #9b59b6 }
+    &.orange { background-color: #e67e22 }
+    &.red    { background-color: #e74c3c }
 }
 .fw-record-info .creator .user-container .user-info {
     display: flex;

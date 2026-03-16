@@ -11,31 +11,15 @@ import CategoryIcon from "../../CategoryIcon/CategoryIcon";
 import {useEffect, useState} from "react";
 import ValueLoading from "../../ValueLoading/ValueLoading";
 import categoriesApi from "../../../api/categoriesApi";
+import useLoadRecordsData from "../../../hooks/useLoadRecordsData";
+import useLoadCategoriesData from "../../../hooks/useLoadCategoriesData";
 
 
-function useLoadCategoryData(categoryId, createNewNotification) {
-	const navigate = useNavigate();
 
-	const request = async () => {
-		const answer = await categoriesApi.getCategoryData(categoryId);
-		if (!answer.status) {
-			createNewNotification("error", answer.msg);
-			navigate("/app/categories");
-		} else {
-			return answer;
-		}
-	}
-
-	let result;
-	useEffect(() => {
-		result = request();
-	}, [request, result]);
-
-	return result;
-}
-
-
-function CategoryInfo({ categories, categoryId, createNewNotification }) {
+function CategoryInfo({
+			categories, categoryId, createNewNotification, updateRecordsData,
+			updateCategoriesData, user, familyOwnerId
+}) {
 	const [icon, setIcon] = useState(undefined);
 	const [name, setName] = useState(undefined);
 	const [color, setColor] = useState(undefined);
@@ -45,7 +29,8 @@ function CategoryInfo({ categories, categoryId, createNewNotification }) {
 	const [recordsList, setRecordsList] = useState(undefined);
 	const navigate = useNavigate();
 
-	// const categoryData = useLoadCategoryData(categoryId, createNewNotification);
+	const loadCategoriesData = useLoadCategoriesData(updateCategoriesData, false);
+	const loadRecordsData = useLoadRecordsData(updateRecordsData, false);
 
 	useEffect(() => {
 		if (categories) {
@@ -74,8 +59,24 @@ function CategoryInfo({ categories, categoryId, createNewNotification }) {
 				console.log(error);
 			});
 		}
-	}, [categories, categoryId, setCategoryStatData, createNewNotification, setCreatorData, setRecordsList]);
+	}, [
+		categories, categoryId, setCategoryStatData, createNewNotification,
+		setCreatorData, setRecordsList, navigate
+	]);
 
+	const clickDeleteHandle = async () => {
+		const answer = await categoriesApi.deleteCategory(categoryId);
+
+		if (!answer.status) {
+			createNewNotification("error", answer.msg);
+			navigate("/app/categories");
+		} else {
+			loadCategoriesData();
+			loadRecordsData();
+			createNewNotification("success", answer.msg);
+			navigate("/app/categories");
+		}
+	}
 
 	return (
 		<div className="content">
@@ -86,10 +87,14 @@ function CategoryInfo({ categories, categoryId, createNewNotification }) {
 				>
 					<IconBack className="icon"/>
 				</Link>
-				<div className="ci-delete-button">
-					<IconDelete className="icon"/>
-					Удалить
-				</div>
+				{creatorData && (creatorData.id === user.id || familyOwnerId === user.id)
+					&& <div
+						className="ci-delete-button"
+						onClick={() => clickDeleteHandle()}
+					>
+						<IconDelete className="icon"/>
+						Удалить
+					</div>}
 			</header>
 
 			<div className="ci-category-header">
@@ -173,12 +178,13 @@ function CategoryInfo({ categories, categoryId, createNewNotification }) {
 								<div
 									className={`record-row ${record.amount.type} ${record.creator.avatar}`}
 									style={{ animationDelay: `${0.3 + 0.1 * index}s` }}
+									key={index}
 								>{/* Colors: blue, green, purple, orange, red */}
 									<div className="record-user-avatar">{record.creator.name[0]}</div>
 									<div className="record-info">
 										<div className="info-title">
 											{record.creator.name}
-											<span className="create-date">{record.createAt}</span>
+											<span className="create-date">{record.createdAt}</span>
 										</div>
 										<div className="record-description">{record.description}</div>
 									</div>

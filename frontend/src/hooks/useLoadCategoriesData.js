@@ -10,7 +10,7 @@ export default function useLoadCategoriesData(updateCategoriesData, forceLoad = 
 	const request = useCallback(async () => {
 		const resp = await categoriesApi.getInfo();
 		if (!resp.status) {
-			// navigate("/", {replace: true});
+			navigate("/", {replace: true});
 		} else {
 			updateCategoriesData(
 				resp.costLeader,

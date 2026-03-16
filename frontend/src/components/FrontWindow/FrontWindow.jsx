@@ -17,7 +17,12 @@ function FrontWindow({ frontWindowData, store }) {
 			{ type === "recordInfo" && <RecordInfo
 				data={frontWindowData.data}
 				recordsData={store.records.recordsData}
-				familyMembers={store.familyData.members}
+				familyData={store.familyData}
+				user={store.user}
+				updateCategoriesData={store.updateCategoriesData}
+				updateFamilyData={store.updateFamilyData}
+				updateRecordsData={store.updateRecordsData}
+				createNewNotification={store.createNewNotification}
 			/>}
 			{ type === "newCategory" && <NewCategory
 				updateCategoriesData={store.updateCategoriesData}
@@ -27,6 +32,10 @@ function FrontWindow({ frontWindowData, store }) {
 				categories={store.categoriesInfo.categories}
 				categoryId={frontWindowData.data}
 				createNewNotification={store.createNewNotification}
+				updateRecordsData={store.updateRecordsData}
+				updateCategoriesData={store.updateCategoriesData}
+				user={store.user}
+				familyOwnerId={store.familyData.ownerId}
 			/> }
 		</div>
 	)

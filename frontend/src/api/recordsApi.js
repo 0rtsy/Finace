@@ -63,6 +63,32 @@ const RecordsApi = {
 				recordsData: resp.data.recordsData
 			}
 		}
+	},
+
+	deleteRecord: async (recordId) => {
+		let resp;
+
+		try {
+			resp = await axiosClient.delete(`/records/delete/${recordId}`);
+		} catch (error) {
+			console.log(error);
+			return {
+				status: false,
+				msg: "Ошибка подключения к серверу. Попробуйте позже"
+			}
+		}
+
+		if (resp.data.status !== 200) {
+			return {
+				status: false,
+				msg: resp.data.msg
+			}
+		} else {
+			return {
+				status: true,
+				msg: ""
+			}
+		}
 	}
 }
 export default RecordsApi;

@@ -50,8 +50,6 @@ function AppRouter({ store }) {
 	}
 	const [activeTab, frontWindowData] = getActiveTab(location.pathname);
 
-	console.log(store);
-
 	return (
 		<Routes>
 			{/* Страница самого приложения */}

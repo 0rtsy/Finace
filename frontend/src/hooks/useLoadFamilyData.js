@@ -11,7 +11,7 @@ export default function useLoadFamilyData(updateFamilyData, forceLoad = true) {
 	const request = useCallback(async () => {
 		const resp = await familyApi.getInfo();
 		if (!resp.status) {
-			// navigate("/family", {replace: true});
+			navigate("/family", {replace: true});
 		} else {
 			updateFamilyData(
 				resp.ownerId,

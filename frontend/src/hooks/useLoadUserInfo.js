@@ -9,10 +9,10 @@ export default function useLoadUserInfo(updateUserData, forceLoad = true) {
 
 	const request = useCallback(async () => {
 		const resp = await userApi.getMe();
-		// Не ропускаем проверку на status == true, т.к. если токен в cookies отсутсвует, функция не будет
+		// Не пропускаем проверку на status == true, т.к если токен в cookies отсутствует, функция не будет
 		// выполнять запрос
 		if (!resp.status) {
-			// navigate("/", {replace: true});
+			navigate("/", {replace: true});
 		} else {
 			updateUserData(resp.id, resp.name, resp.role, resp.avatar);
 		}

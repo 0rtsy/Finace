@@ -79,7 +79,7 @@ async def get_category_data(
 				"name": record.owner.name,
 				"avatar": record.owner.avatar
 			},
-			"createAt": record_date,
+			"createdAt": record_date,
 			"description": record.description,
 			"amount": {
 				"value": format_currency(record.amount),
@@ -90,6 +90,7 @@ async def get_category_data(
 	return {
 		"error": None,
 		"creator": {
+			"id": category.owner_id,
 			"name": category.owner.name,
 			"role": category.owner.family_role,
 			"avatar": category.owner.avatar
