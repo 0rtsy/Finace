@@ -73,7 +73,9 @@ async def invite_to_family(
 			"status": 404,
 			"details": "Family not found"
 		}
-
+		
+	user: type[models.Users] = db.query(models.Users).filter(models.Users.id == user.id).first()
+	
 	new_members_list = family_data.members_id.copy()
 	new_members_list.append(user.id)
 
