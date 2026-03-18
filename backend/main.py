@@ -12,7 +12,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-main_router = APIRouter(prefix="/api")
+main_router = APIRouter()
 main_router.include_router(auth.router)
 main_router.include_router(records.router)
 main_router.include_router(families.router)
