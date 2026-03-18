@@ -19,6 +19,8 @@ async def leave_from_family(
 			"error": "Family not found" # |!| redirect the user to the family creation page
 		}
 
+	user: type[models.Users] = db.query(models.Users).filter(models.Users.id == user.id).first()
+
 	if user.family.owner_id == user.id:
 		# Delete family
 

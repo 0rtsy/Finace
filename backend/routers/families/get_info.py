@@ -33,6 +33,8 @@ async def get_my_family_info(
 	date_last_month = date_now - timedelta(days=31)
 	return_data = []
 
+	user: type[models.Users] = db.query(models.Users).filter(models.Users.id == user.id).first()
+
 	for user_id in user.family.members_id:
 		member: type[models.Users] = db.query(models.Users).filter(models.Users.id == user_id).first()
 

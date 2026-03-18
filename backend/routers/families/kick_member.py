@@ -20,8 +20,9 @@ async def kick_member_by_id(
 		user: models.Users = Depends(get_current_user)
 ):
 	member: type[models.Users] = db.query(models.Users).filter(models.Users.id == data.user_id).first()
+	user: type[models.Users] = db.query(models.Users).filter(models.Users.id == user.id).first()
 
-	if user.family is None:
+	if user.family_id is None:
 		return {
 			"status": 400,
 			"error": "Family not found",  # |!| redirect the user to the family creation page

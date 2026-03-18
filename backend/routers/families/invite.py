@@ -49,7 +49,7 @@ async def invite_to_family(
 		db: Session = Depends(get_db),
 		user: models.Users = Depends(get_current_user)
 ):
-	if user.family is not None:
+	if user.family_id is not None:
 		return {
 			"status": 401,
 			"details": "You are already part of a family"
