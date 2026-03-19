@@ -1,5 +1,4 @@
-import "./Stylization.css"
-import {useState} from "react";
+import "./Stylization.css";
 import CategoryIcon from "../../../CategoryIcon/CategoryIcon";
 
 

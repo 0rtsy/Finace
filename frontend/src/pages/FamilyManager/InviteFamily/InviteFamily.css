@@ -69,6 +69,13 @@
         font-size: 28px;
     }
 }
+@media (max-width: 395px) {
+    .code-input-cell {
+        width: 40px;
+        height: 50px;
+        font-size: 24px;
+    }
+}
 
 .fm-container.invite-family .family-viewer {
     display: flex;
@@ -77,7 +84,14 @@
     background: var(--containers-color);
     border-radius: 20px;
     padding: 15px;
-    transition: height 5s;
+    overflow: hidden;
+    transition: height ease 5s, padding ease .5s, opacity ease 1s;
+
+    &.hide {
+        opacity: 0;
+        height: 0;
+        padding: 0;
+    }
 }
 .fm-container.invite-family .family-info {
     overflow: hidden;

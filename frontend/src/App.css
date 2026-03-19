@@ -33,6 +33,7 @@ body {
     display: flex;
     justify-content: center;
     transition: background-color .5s ease;
+    user-select: none;
 
     -webkit-tap-highlight-color: transparent;
 }

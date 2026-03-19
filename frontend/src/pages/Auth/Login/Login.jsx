@@ -93,7 +93,6 @@ function Login({ setFrontWindow, setFrontWindowData }) {
 				Регистрация
 				<ArrowIcon className="icon"/>
 			</Link>
-			<Link to="/app">Продолжить без входа</Link>
 		</div>
 	)
 }

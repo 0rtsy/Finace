@@ -82,7 +82,7 @@ function Categories({ categoriesInfo, updateCategoriesData }) {
 											<span className="value">-{categoriesInfo.costLeader.value}</span> за месяц
 										</div>
 									</>
-								: <div className="no-leader">Информация отсутсвует</div>
+								: <div className="no-leader">Информация отсутствует</div>
 							: <>
 									<ValueLoading width="80%" height="60px"/>
 									<ValueLoading width="70%" height="15px"/>

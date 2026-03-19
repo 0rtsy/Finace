@@ -2,12 +2,14 @@ import "./FamilyManager.css"
 import {Link, useNavigate, useSearchParams} from "react-router";
 import CreateFamily from "./CreateFamily/CreateFamily";
 import InviteFamily from "./InviteFamily/InviteFamily";
-import {useEffect, useState} from "react";
+import {useEffect, useState, useRef} from "react";
 import familyApi from "../../api/familyApi";
+import LoadingCircle from "../../components/LoadingCircle/LoadingCircle";
 
 
 export const useFamilyRedirect = () => {
 	const navigate = useNavigate();
+	const isLoad = useRef(false);
 
 	useEffect(() => {
 		let isMounted = true;
@@ -16,6 +18,8 @@ export const useFamilyRedirect = () => {
 			const answer = await familyApi.getInfo();
 			if (isMounted && answer.status) {
 				navigate("/app", {replace: true});
+			} else if (answer.status) {
+				isLoad.current = true;
 			}
 		}
 
@@ -26,7 +30,9 @@ export const useFamilyRedirect = () => {
 		return () => {
 			isMounted = false;
 		};
-	}, [navigate]);
+	}, [navigate, isLoad]);
+
+	return isLoad;
 };
 
 
@@ -36,7 +42,7 @@ function FamilyManager() {
 	const navigate = useNavigate();
 	let tab = searchParam.get("tab") || "main";
 
-	useFamilyRedirect();
+	const isLoad = useFamilyRedirect();
 
 	if (isFamilyCreating && tab !== "create") {
 		navigate("?tab=create");
@@ -45,22 +51,29 @@ function FamilyManager() {
 
 	return (
 		<div className="family-manager-container">
-			<div className={`wrapper ${tab}`}>
-				<InviteFamily />
+			{isLoad
+				? <div className={`wrapper ${tab}`}>
+					<InviteFamily/>
 
-				<div className="fm-container selector">
-					<div className="animation-container">
-						<img src="/animations/family.gif" alt="Family Animation" className="animation" />
+					<div className="fm-container selector">
+						<div className="animation-container">
+							<img src="/animations/family.gif" alt="Family Animation" className="animation"/>
+						</div>
+						<header className="title">Создайте семью и добавляйте своих родных!</header>
+						<div className="buttons-container">
+							<Link to="?tab=create" className="create-family">Создать семью</Link>
+							<Link to="?tab=invite" className="invite-family">Присоединиться к семье</Link>
+						</div>
 					</div>
-					<header className="title">Создайте семью и добавляйте своих родных!</header>
-					<div className="buttons-container">
-						<Link to="?tab=create" className="create-family">Создать семью</Link>
-						<Link to="?tab=invite" className="invite-family">Присоединиться к семье</Link>
-					</div>
+
+					<CreateFamily isFamilyCreating={isFamilyCreating} setIsFamilyCreating={setIsFamilyCreating}/>
 				</div>
 
-				<CreateFamily isFamilyCreating={isFamilyCreating} setIsFamilyCreating={setIsFamilyCreating} />
-			</div>
+				: <div className="loading-family-information">
+					<LoadingCircle width="70px" height="70px"/>
+					Подождите...
+				</div>
+			}
 		</div>
 	)
 }

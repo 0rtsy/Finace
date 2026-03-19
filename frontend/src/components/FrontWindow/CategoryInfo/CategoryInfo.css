@@ -82,6 +82,14 @@
     display: flex;
     gap: 10px;
 }
+@media (max-width: 420px) {
+    .ci-category-header .category-title-section .category-meta {
+        flex-direction: column;
+    }
+    .ci-category-header .category-title-section .category-meta .creator-chip {
+        width: min-content;
+    }
+}
 .ci-category-header .category-title-section .category-meta .records-count {
     display: flex;
     align-items: center;

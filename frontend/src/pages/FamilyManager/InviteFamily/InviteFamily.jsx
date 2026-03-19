@@ -3,7 +3,7 @@ import {ReactComponent as ArrowIcon} from "../../../assets/icons/keyboard_arrow_
 import {ReactComponent as CrownIcon} from "../../../assets/icons/owner_crown.svg";
 import {ReactComponent as FamilyIcon} from "../../../assets/icons/family.svg";
 import {ReactComponent as SignInIcon} from "../../../assets/icons/sign_in.svg";
-import {Link, useNavigate, useSearchParams} from "react-router";
+import {Link, useNavigate} from "react-router";
 import {useEffect, useRef, useState} from "react";
 import familyApi from "../../../api/familyApi";
 
@@ -235,7 +235,7 @@ function InviteFamily() {
 				</div>
 				<header className="title">Вступите в семью по коду владельца</header>
 				<CodeInput onComplete={onComplete} status={inputCodeStatus} />
-				<div className="family-viewer">
+				<div className={`family-viewer${familySearchStatus === "none" ? " hide" : ""}`}>
 					{familySearchStatus !== "none" && familySearchStatus === "found"
 						? <div className="family-info">
 								<div className="family-header">

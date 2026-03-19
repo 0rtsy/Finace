@@ -4,7 +4,6 @@ import {ReactComponent as NoCategoryIcon} from "../../../assets/icons/book_quest
 import {useState} from "react";
 import CategoryItem from "./CategoryItem/CategoryItem";
 import ValueLoading from "../../ValueLoading/ValueLoading";
-import categories from "../../../pages/Main/Tabs/Categories/Categories";
 import useLoadCategoriesData from "../../../hooks/useLoadCategoriesData";
 
 function Categories({newRecordData, updateNewRecordData, categoriesInfo, updateCategoriesData}) {

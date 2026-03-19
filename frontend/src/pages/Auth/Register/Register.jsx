@@ -122,7 +122,6 @@ function Register({ setFrontWindow, setFrontWindowData }) {
 				<ArrowIcon className="icon"/>
 				Вход
 			</Link>
-			<Link to="/app">Продолжить без входа</Link>
 		</div>
 	)
 }
