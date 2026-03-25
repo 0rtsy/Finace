@@ -2,14 +2,14 @@ import "./FamilyManager.css"
 import {Link, useNavigate, useSearchParams} from "react-router";
 import CreateFamily from "./CreateFamily/CreateFamily";
 import InviteFamily from "./InviteFamily/InviteFamily";
-import {useEffect, useState, useRef} from "react";
+import {useEffect, useState} from "react";
 import familyApi from "../../api/familyApi";
 import LoadingCircle from "../../components/LoadingCircle/LoadingCircle";
 
 
 export const useFamilyRedirect = () => {
 	const navigate = useNavigate();
-	const isLoad = useRef(false);
+	const [isLoad, setLoad] = useState(false);
 
 	useEffect(() => {
 		let isMounted = true;
@@ -19,7 +19,7 @@ export const useFamilyRedirect = () => {
 			if (isMounted && answer.status) {
 				navigate("/app", {replace: true});
 			} else if (!answer.status) {
-				isLoad.current = true;
+				setLoad(true);
 			}
 		}
 
@@ -40,6 +40,7 @@ function FamilyManager() {
 	const [isFamilyCreating, setIsFamilyCreating] = useState(false);
 	const [searchParam] = useSearchParams();
 	const navigate = useNavigate();
+	const [wrapperTransition, setWrapperTransition] = useState("none");
 	let tab = searchParam.get("tab") || "main";
 
 	const isLoad = useFamilyRedirect();
@@ -49,10 +50,16 @@ function FamilyManager() {
 		tab = "create";
 	}
 
+	useEffect(() => {
+		setTimeout(() => {
+			setWrapperTransition("transform .5s ease-in-out");
+		}, 400)
+	})
+
 	return (
 		<div className="family-manager-container">
-			{isLoad.current
-				? <div className={`wrapper ${tab}`}>
+			{isLoad === true
+				? <div className={`wrapper ${tab}`} style={{transition: wrapperTransition}}>
 					<InviteFamily/>
 
 					<div className="fm-container selector">

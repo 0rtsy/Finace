@@ -4,7 +4,7 @@ import {ReactComponent as CrownIcon} from "../../../assets/icons/owner_crown.svg
 import {ReactComponent as FamilyIcon} from "../../../assets/icons/family.svg";
 import {ReactComponent as SignInIcon} from "../../../assets/icons/sign_in.svg";
 import {Link, useNavigate} from "react-router";
-import {useEffect, useRef, useState} from "react";
+import {useRef, useState} from "react";
 import familyApi from "../../../api/familyApi";
 
 
@@ -18,9 +18,9 @@ const CodeInput = ({
 	const [isPasting, setIsPasting] = useState(false);
 	const inputsRef = useRef([]);
 
-	useEffect(() => {
-		inputsRef.current[0]?.focus();
-	}, []);
+	// useEffect(() => {
+	// 	inputsRef.current[0]?.focus();
+	// }, []);
 
 	// const clearAll = () => {
 	// 	setCode(Array(length).fill(''));

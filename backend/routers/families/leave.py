@@ -30,7 +30,7 @@ async def leave_from_family(
 				.filter(models.Users.id == user_id)
 				.first()
 			)
-			if member is not None:
+			if member is not None and user_id != user.id:
 				member.family_id = None
 				member.family = None
 				member.family_role = None
@@ -50,6 +50,11 @@ async def leave_from_family(
 
 		db.delete(family_data)
 		db.commit()
+		user.family_id = None
+		user.family = None
+		user.family_role = None
+		db.commit()
+
 		return {
 			"status": 200
 		}
