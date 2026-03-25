@@ -42,6 +42,12 @@ async def leave_from_family(
 			.first()
 		)
 
+		if family_data is None:
+			return {
+				"status": 400,
+				"error": "Family not found"
+			}
+
 		db.delete(family_data)
 		db.commit()
 		return {

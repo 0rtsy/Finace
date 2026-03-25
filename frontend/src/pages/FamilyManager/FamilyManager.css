@@ -3,6 +3,12 @@
     max-width: var(--app-max-width);
     height: 100vh;
     overflow: hidden;
+    animation: anim-family-manager-spawn .7s ease-in-out forwards;
+}
+@keyframes anim-family-manager-spawn {
+    from {
+        opacity: 0;
+    }
 }
 .family-manager-container .wrapper {
     height: 100%;

@@ -18,7 +18,7 @@ export const useFamilyRedirect = () => {
 			const answer = await familyApi.getInfo();
 			if (isMounted && answer.status) {
 				navigate("/app", {replace: true});
-			} else if (answer.status) {
+			} else if (!answer.status) {
 				isLoad.current = true;
 			}
 		}
@@ -51,7 +51,7 @@ function FamilyManager() {
 
 	return (
 		<div className="family-manager-container">
-			{isLoad
+			{isLoad.current
 				? <div className={`wrapper ${tab}`}>
 					<InviteFamily/>
 

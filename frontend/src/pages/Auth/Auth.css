@@ -97,6 +97,19 @@
         padding: 0 20px;
     }
 }
+.auth-slide .error-container {
+    color: var(--expenses-color);
+    width: 100%;
+    height: 17px;
+    overflow: hidden;
+    font-size: 14px;
+    font-weight: var(--font-regular);
+
+    &.hide {
+        height: 0;
+        opacity: 0;
+    }
+}
 .register-container {
     min-width: 100%;
 }

@@ -6,6 +6,14 @@
     overflow: hidden;
 
     display: flex;
+
+    animation: anim-main-container-spawn .5s ease-in-out forwards;
+}
+
+@keyframes anim-main-container-spawn {
+    from {
+        opacity: 0;
+    }
 }
 
 .app-container {

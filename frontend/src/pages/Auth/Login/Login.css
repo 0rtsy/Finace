@@ -39,6 +39,9 @@
                 color: rgba(239, 68, 68, 0.7);
             }
         }
+        & .label {
+            color: var(--expenses-color);
+        }
     }
 }
 .login-container .input-field .label {
@@ -48,6 +51,7 @@
     align-items: center;
     border-right: 1px solid #333;
     color: var(--main-color);
+    transition: color .2s ease;
 
     & .icon {
         width: 24px;

@@ -11,27 +11,27 @@ function Login({ setFrontWindow, setFrontWindowData }) {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [isLogging, setIsLogging] = useState(false);
-	const [isEmailError, setEmailError] = useState(false);
-	const [isPasswordError, setPasswordError] = useState(false);
+	const [emailError, setEmailError] = useState(null);
+	const [passwordError, setPasswordError] = useState(null);
 	const [loginButtonText, setLoginButtonText] = useState("Войти");
 	const navigate = useNavigate();
 
 
 	const Validation = (fromLoginButton = false) => {
 		if (isLogging || fromLoginButton) {
-			setEmailError(false);
-			setPasswordError(false);
+			setEmailError(null);
+			setPasswordError(null);
 
 			if (email.length < 5) {
-				setEmailError(true);
+				setEmailError("Невалидная почта");
 				return false;
 
 			} else if (!(/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))) {
-				setEmailError(true);
+				setEmailError("Невалидная почта");
 				return false;
 
 			} else if (password.length < 6) {
-				setPasswordError(true);
+				setPasswordError("Слишком короткий пароль");
 				return false;
 
 			} else { return true; }
@@ -62,7 +62,7 @@ function Login({ setFrontWindow, setFrontWindowData }) {
 	return (
 		<div className="login-container">
 			<header className="login-title">Вход</header>
-			<div className={`input-field email${isEmailError ? ' error' : ''}`}>
+			<div className={`input-field email${emailError !== null ? ' error' : ''}`}>
 				<div className="label">
 					<EmailIcon className="icon"/>
 				</div>
@@ -75,7 +75,10 @@ function Login({ setFrontWindow, setFrontWindowData }) {
 					}}
 				/>
 			</div>
-			<div className={`input-field password${isPasswordError ? ' error' : ''}`}>
+			<div className={`error-container${emailError === null ? " hide" : ""}`}>
+				{emailError}
+			</div>
+			<div className={`input-field password${passwordError !== null ? ' error' : ''}`}>
 				<div className="label">
 					<LockIcon className="icon"/>
 				</div>
@@ -87,6 +90,9 @@ function Login({ setFrontWindow, setFrontWindowData }) {
 						Validation();
 					}}
 				/>
+			</div>
+			<div className={`error-container${passwordError === null ? " hide" : ""}`}>
+				{passwordError}
 			</div>
 			<div className="login-button" onClick={() => Login()}>{loginButtonText}</div>
 			<Link to="/?tab=register" className="register-button">

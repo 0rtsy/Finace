@@ -13,6 +13,14 @@
     backdrop-filter: blur(20px);
     user-select: none;
     z-index: 1000;
+    animation: anim-navigation-bar-spawn .5s ease-out forwards;
+}
+
+@keyframes anim-navigation-bar-spawn {
+    from {
+        opacity: 0;
+        bottom: -100px;
+    }
 }
 
 .nav-background {
